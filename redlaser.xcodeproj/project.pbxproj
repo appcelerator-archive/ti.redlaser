@@ -28,6 +28,11 @@
 		24DE9E1211C5FE74003F90F6 /* TiRedlaserModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* TiRedlaserModuleAssets.m */; };
 		8F534CD316420747001D00EB /* libRedLaserSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F534CD116420747001D00EB /* libRedLaserSDK.a */; };
 		8F534CD416420748001D00EB /* RedLaserSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F534CD216420747001D00EB /* RedLaserSDK.h */; };
+		8F534CDB1642C0AA001D00EB /* BarcodeResultProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F534CD91642C0AA001D00EB /* BarcodeResultProxy.h */; };
+		8F534CDC1642C0AA001D00EB /* BarcodeResultProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F534CDA1642C0AA001D00EB /* BarcodeResultProxy.m */; };
+		8F534CDE1642FEB8001D00EB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F534CDD1642FEB8001D00EB /* UIKit.framework */; };
+		8F534CF01643600C001D00EB /* OverlayViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F534CEE1643600C001D00EB /* OverlayViewController.h */; };
+		8F534CF11643600C001D00EB /* OverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F534CEF1643600C001D00EB /* OverlayViewController.m */; };
 		AA747D9F0F9514B9006C5449 /* TiRedlaser_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiRedlaser_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -50,6 +55,11 @@
 		24DE9E1011C5FE74003F90F6 /* TiRedlaserModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiRedlaserModuleAssets.m; path = Classes/TiRedlaserModuleAssets.m; sourceTree = "<group>"; };
 		8F534CD116420747001D00EB /* libRedLaserSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libRedLaserSDK.a; sourceTree = "<group>"; };
 		8F534CD216420747001D00EB /* RedLaserSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedLaserSDK.h; sourceTree = "<group>"; };
+		8F534CD91642C0AA001D00EB /* BarcodeResultProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarcodeResultProxy.h; path = Classes/BarcodeResultProxy.h; sourceTree = "<group>"; };
+		8F534CDA1642C0AA001D00EB /* BarcodeResultProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarcodeResultProxy.m; path = Classes/BarcodeResultProxy.m; sourceTree = "<group>"; };
+		8F534CDD1642FEB8001D00EB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8F534CEE1643600C001D00EB /* OverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OverlayViewController.h; path = Classes/OverlayViewController.h; sourceTree = "<group>"; };
+		8F534CEF1643600C001D00EB /* OverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OverlayViewController.m; path = Classes/OverlayViewController.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* TiRedlaser_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiRedlaser_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libTiRedlaser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTiRedlaser.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F534CDE1642FEB8001D00EB /* UIKit.framework in Frameworks */,
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
 				8F534CD316420747001D00EB /* libRedLaserSDK.a in Frameworks */,
 			);
@@ -91,6 +102,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8F534CDD1642FEB8001D00EB /* UIKit.framework */,
 				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -103,6 +115,10 @@
 				24DE9E1011C5FE74003F90F6 /* TiRedlaserModuleAssets.m */,
 				24DD6CF71134B3F500162E58 /* TiRedlaserModule.h */,
 				24DD6CF81134B3F500162E58 /* TiRedlaserModule.m */,
+				8F534CEE1643600C001D00EB /* OverlayViewController.h */,
+				8F534CEF1643600C001D00EB /* OverlayViewController.m */,
+				8F534CD91642C0AA001D00EB /* BarcodeResultProxy.h */,
+				8F534CDA1642C0AA001D00EB /* BarcodeResultProxy.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -136,6 +152,8 @@
 				24DD6CF91134B3F500162E58 /* TiRedlaserModule.h in Headers */,
 				24DE9E1111C5FE74003F90F6 /* TiRedlaserModuleAssets.h in Headers */,
 				8F534CD416420748001D00EB /* RedLaserSDK.h in Headers */,
+				8F534CDB1642C0AA001D00EB /* BarcodeResultProxy.h in Headers */,
+				8F534CF01643600C001D00EB /* OverlayViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +226,8 @@
 			files = (
 				24DD6CFA1134B3F500162E58 /* TiRedlaserModule.m in Sources */,
 				24DE9E1211C5FE74003F90F6 /* TiRedlaserModuleAssets.m in Sources */,
+				8F534CDC1642C0AA001D00EB /* BarcodeResultProxy.m in Sources */,
+				8F534CF11643600C001D00EB /* OverlayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,507 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<HTML>
+<HEAD>
+	
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.4.1  (Unix)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGEDBY" CONTENT="Zsombor Papp">
+	<META NAME="CHANGED" CONTENT="20121212;16342700">
+	
+	<STYLE>
+		<!-- 
+		BODY,DIV,TABLE,THEAD,TBODY,TFOOT,TR,TH,TD,P { font-family:"Arial"; font-size:x-small }
+		 -->
+	</STYLE>
+	
+</HEAD>
+
+<BODY TEXT="#000000">
+<TABLE FRAME=VOID CELLSPACING=0 COLS=3 RULES=NONE BORDER=0>
+	<COLGROUP><COL WIDTH=365><COL WIDTH=297><COL WIDTH=366></COLGROUP>
+	<TBODY>
+		<TR>
+			<TD WIDTH=365 HEIGHT=22 ALIGN=CENTER VALIGN=TOP><B><U><FONT SIZE=4>Titanium RedLaser Module</FONT></U></B></TD>
+			<TD WIDTH=297 ALIGN=CENTER VALIGN=TOP><B><U><FONT SIZE=4>RedLaser SDK equivalent on iOS</FONT></U></B></TD>
+			<TD WIDTH=366 ALIGN=CENTER VALIGN=TOP><B><U><FONT SIZE=4>RedLaser SDK equivalent on Android</FONT></U></B></TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=22 ALIGN=CENTER VALIGN=TOP><B><U><FONT SIZE=4><BR></FONT></U></B></TD>
+			<TD ALIGN=CENTER VALIGN=TOP><B><U><FONT SIZE=4><BR></FONT></U></B></TD>
+			<TD ALIGN=CENTER VALIGN=TOP><B><U><FONT SIZE=4><BR></FONT></U></B></TD>
+		</TR>
+		<TR>
+			<TD COLSPAN=3 HEIGHT=17 ALIGN=CENTER VALIGN=TOP><B>Barcode Type Constants</B></TD>
+			</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>BARCODE_TYPE_CODABAR</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>kBarcodeTypeCodabar</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>BarcodeTypes.CODABAR</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>BARCODE_TYPE_CODE128</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>kBarcodeTypeCODE128</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>BarcodeTypes.CODE128</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>BARCODE_TYPE_CODE39</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>kBarcodeTypeCODE39</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>BarcodeTypes.CODE39</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>BARCODE_TYPE_CODE93</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>BarcodeTypes.CODE93</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>BARCODE_TYPE_DATAMATRIX</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>kBarcodeTypeDATAMATRIX</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>BarcodeTypes.DATAMATRIX</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>BARCODE_TYPE_EAN13</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>kBarcodeTypeEAN13</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>BarcodeTypes.EAN13</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>BARCODE_TYPE_EAN2</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>kBarcodeTypeEAN2</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>BarcodeTypes.EAN2</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>BARCODE_TYPE_EAN5</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>kBarcodeTypeEAN5</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>BarcodeTypes.EAN5</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>BARCODE_TYPE_EAN8</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>kBarcodeTypeEAN8</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>BarcodeTypes.EAN8</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>BARCODE_TYPE_ITF</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>kBarcodeTypeITF</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>BarcodeTypes.ITF</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>BARCODE_TYPE_NONE</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>BarcodeTypes.NONE</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>BARCODE_TYPE_QRCODE</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>kBarcodeTypeQRCODE</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>BarcodeTypes.QRCODE</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>BARCODE_TYPE_RSS14</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>BarcodeTypes.RSS14</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>BARCODE_TYPE_STICKY</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>kBarcodeTypeSTICKY</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>BarcodeTypes.STICKYBITS</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>BARCODE_TYPE_UPCE</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>kBarcodeTypeUPCE</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>BarcodeTypes.UPCE </TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP><BR></TD>
+			<TD ALIGN=LEFT VALIGN=TOP><BR></TD>
+			<TD ALIGN=LEFT VALIGN=TOP><BR></TD>
+		</TR>
+		<TR>
+			<TD COLSPAN=3 HEIGHT=17 ALIGN=CENTER VALIGN=TOP><B>SDK Status Constants</B></TD>
+			</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>STATUS_API_LEVEL_TOO_LOW</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>APILevelTooLow</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>STATUS_EVAL_MODE_READY</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>RLState_EvalModeReady</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>EvalModeReady</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>STATUS_LICENSED_MODE_READY</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>RLState_LicensedModeReady</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>LicensedModeReady</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=18 ALIGN=LEFT VALIGN=TOP><FONT FACE="Menlo-Regular" COLOR="#000000">STATUS_MISSING_OS_LIBS</FONT></TD>
+			<TD ALIGN=LEFT VALIGN=TOP>RLState_MissingOSLibraries</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>STATUS_NO_CAMERA</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>RLState_NoCamera</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>NoCamera</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>STATUS_BAD_LICENSE</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>RLState_BadLicense</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>BadLicense</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>STATUS_SCAN_LIMIT_REACHED</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>RLState_ScanLimitReached</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>ScanLimitReached</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>STATUS_MISSING_PERMISSIONS</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>MissingPermissions</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>STATUS_UNKNOWN_STATE</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>UnknownState</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP><BR></TD>
+			<TD ALIGN=LEFT VALIGN=TOP><BR></TD>
+			<TD ALIGN=LEFT VALIGN=TOP><BR></TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.sdkVersion property</TD>
+			<TD ALIGN=LEFT VALIGN=TOP><FONT COLOR="#000000">RL_GetRedLaserSDKVersion</FONT></TD>
+			<TD ALIGN=LEFT VALIGN=TOP>RedLaserExtras.getRedLaserSDKVersion</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.status property</TD>
+			<TD ALIGN=LEFT VALIGN=TOP><FONT COLOR="#000000">RL_CheckReadyStatus</FONT></TD>
+			<TD ALIGN=LEFT VALIGN=TOP>RedLaserExtras.checkReadyStatus</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.findBarcodesInBlob</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>FindBarcodesInUIImage</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP><BR></TD>
+			<TD ALIGN=LEFT VALIGN=TOP><BR></TD>
+			<TD ALIGN=LEFT VALIGN=TOP><BR></TD>
+		</TR>
+		<TR>
+			<TD COLSPAN=3 HEIGHT=17 ALIGN=CENTER VALIGN=TOP><B>BarcodeResult class</B></TD>
+			</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>associatedBarcode</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>associatedBarcode</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>getAssociatedBarcode(array of BarcodeResultProxies)</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>getAssociatedBarcode(AbstractCollection&lt;BarcodeResult&gt;)</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>associatedBarcodeUUID property</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>associatedBarcode</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>barcodeLocation</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>barcodeLocation</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>barcodeLocation</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>barcodeString</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>barcodeString</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>barcodeString</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>barcodeType</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>barcodeType</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>barcodeType</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>extendedBarcodeString</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>extendedBarcodeString</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>extendedBarcodeString</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>firstScanTime</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>firstScanTime</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>firstScanTime</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>isPartialBarcode</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>isPartialBarcode</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>mostRecentScanTime</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>mostRecentScanTime</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>mostRecentScanTime</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>uniqueID</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>uniqueID</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>equals(BarcodeResult)</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>equals(BarcodeResult)</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>BarcodeResultProxy.barcodeTypeString property</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>getBarcodeType (returns type as a string!!!)</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP><BR></TD>
+			<TD ALIGN=LEFT VALIGN=TOP><BR></TD>
+			<TD ALIGN=LEFT VALIGN=TOP><BR></TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.pauseScanning(&lt;params&gt;)</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>pauseScanning</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=RIGHT VALIGN=TOP>overlay parameter of startScanning</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>overlay</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>setContentView() (inherited from Activity)</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=RIGHT VALIGN=TOP>cameraPreview parameter of startScanning</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>getPreviewView</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=RIGHT VALIGN=TOP>cameraIndex parameter of RedLaser.startScanning</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>requestCameraIndex</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=RIGHT VALIGN=TOP>orientation parameter of startScanning</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>getOrientationSetting()</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.resumeScanning()</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>resumeScanning</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.clearResultsSet()</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>clearResultsSet</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.doneScanning()</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>doneScanning</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>doneScanning</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.isFlashAvailable</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>hasFlash</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>isTorchAvailable</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.turnFlash(boolean)</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>turnFlash:(BOOL)value</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>n/a</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.torchState</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>torchState property</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>getTorch, setTorch</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.requestCameraSnapshot(bool)</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>requestCameraSnapshot:(bool)</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>requestImageData</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.enabledBarcodeTypesChanged event</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>enabledBarcodeTypesChanged()</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.activeRect property</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>activeRegion (property)</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>setActiveRect()</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.orientation property</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>orientation</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.isFocusing property</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>isFocusing</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.useFrontCamera property</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>useFrontCamera</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.exposureLock property</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>exposureLock</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.scanCodabar</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>scanCODABAR</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>enabledTypes.get/setCodabar</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.scanCode128</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>scanCODE128</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>enabledTypes.get/setCode128</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.scanCode39</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>scanCODE39</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>enabledTypes.get/setCode39</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.scanCode93</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>enabledTypes.get/setCode93</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.scanDataMatrix</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>scanDATAMATRIX</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>enabledTypes.get/setDataMatrix</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.scanEan13</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>scanEAN13</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>enabledTypes.get/setEan13</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.scanEan2</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>scanEAN2</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>enabledTypes.get/setEan2</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.scanEan5</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>scanEAN5</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>enabledTypes.get/setEan5</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.scanEan8</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>scanEAN8</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>enabledTypes.get/setEan8</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.scanITF</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>scanITF</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>enabledTypes.get/setITF</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.scanQRCode</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>scanQRCODE</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>enabledTypes.get/setQRCode</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.scanRSS14</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>enabledTypes.get/setRSS14</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.scanSticky</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>scanSTICKY</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>enabledTypes.get/setSticky</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.scanUPCE</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>scanUPCE</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>enabledTypes.get/setUpce</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.enabledTypes property</TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>enabledTypes.getEnabledTypes/setEnabledTypes</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP><BR></TD>
+			<TD ALIGN=LEFT VALIGN=TOP><BR></TD>
+			<TD ALIGN=LEFT VALIGN=TOP><BR></TD>
+		</TR>
+		<TR>
+			<TD COLSPAN=3 HEIGHT=17 ALIGN=CENTER VALIGN=TOP><B>Events</B></TD>
+			</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.scannerReturnedResults</TD>
+			<TD ALIGN=LEFT VALIGN=TOP><FONT COLOR="#000000">barcodePickerController:returnResults:</FONT></TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=RIGHT VALIGN=TOP>RedLaser.scannerReturnedResults.results</TD>
+			<TD ALIGN=RIGHT VALIGN=TOP><FONT COLOR="#000000">(NSSet *)results</FONT></TD>
+			<TD ALIGN=LEFT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.scannerStatusUpdated</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>barcodePickerController:statusUpdated:</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>BarcodeScannerActivity.onScanStatusUpdate</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=RIGHT VALIGN=TOP>RedLaser.scannerStatusUpdated.foundBarcodes</TD>
+			<TD ALIGN=RIGHT VALIGN=TOP>FoundBarcodes</TD>
+			<TD ALIGN=RIGHT VALIGN=TOP>FoundBarcodes</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=RIGHT VALIGN=TOP>RedLaser.scannerStatusUpdated.newFoundBarcodes</TD>
+			<TD ALIGN=RIGHT VALIGN=TOP>NewFoundBarcodes</TD>
+			<TD ALIGN=RIGHT VALIGN=TOP>NewFoundBarcodes</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=RIGHT VALIGN=TOP>RedLaser.scannerStatusUpdated.guidance</TD>
+			<TD ALIGN=RIGHT VALIGN=TOP>Guidance</TD>
+			<TD ALIGN=RIGHT VALIGN=TOP>Guidance</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=RIGHT VALIGN=TOP>RedLaser.scannerStatusUpdated.valid</TD>
+			<TD ALIGN=RIGHT VALIGN=TOP>Valid</TD>
+			<TD ALIGN=RIGHT VALIGN=TOP BGCOLOR="#969696">n/a</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=RIGHT VALIGN=TOP>RedLaser.scannerStatusUpdated.inRange</TD>
+			<TD ALIGN=RIGHT VALIGN=TOP>InRange</TD>
+			<TD ALIGN=RIGHT VALIGN=TOP>InRange</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=RIGHT VALIGN=TOP>RedLaser.scannerStatusUpdated.partialBarcode</TD>
+			<TD ALIGN=RIGHT VALIGN=TOP>PartialBarcode</TD>
+			<TD ALIGN=RIGHT VALIGN=TOP>PartialBarcode</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=RIGHT VALIGN=TOP>RedLaser.scannerStatusUpdated.cameraSnapshot</TD>
+			<TD ALIGN=RIGHT VALIGN=TOP>CameraSnapshot</TD>
+			<TD ALIGN=RIGHT VALIGN=TOP>CameraSnapshot</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.backButtonPressed</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>onBackPressed</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.cameraError</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>onCameraError</TD>
+		</TR>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT VALIGN=TOP>RedLaser.orientationchange</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>n/a</TD>
+			<TD ALIGN=LEFT VALIGN=TOP>onConfigurationChanged</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<!-- ************************************************************************** -->
+</BODY>
+
+</HTML>
