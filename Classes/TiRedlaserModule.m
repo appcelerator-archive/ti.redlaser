@@ -1,9 +1,16 @@
-/**
- * Your Copyright Here
- *
- * Appcelerator Titanium is Copyright (c) 2009-2010 by Appcelerator, Inc.
- * and licensed under the Apache Public License (version 2)
- */
+//  TiRedLaserModule.m
+//  redlaser
+//
+//  Created by: 
+//  	Zsombor Papp	zsombor.papp@logicallabs.com
+//  	Logical Labs	titanium@logicallabs.com
+//
+//  Created on 11/1/12
+//
+//  Copyright (c) 2009-2012 by Appcelerator, Inc. All Rights Reserved.
+//
+
+
 #import "TiRedlaserModule.h"
 #import "TiBase.h"
 #import "TiHost.h"
