@@ -4,10 +4,10 @@
 #
 version: 0.1
 apiversion: 2
-description: My module
-author: Zsombor Papp
-license: Specify your license
-copyright: Copyright (c) 2012 by Your Company
+description: RedLaser Module
+author: Zsombor Papp, Logical Labs
+license: Appcelerator Commercial License
+copyright: Copyright (c) 2011-2012 by Appcelerator,  Inc.
 
 
 # these should not be edited
