@@ -143,52 +143,48 @@ Compare this to the STATUS\_XXX constants.
 
 __Type__: Integer
 
-#### sdkVersion
-
-__Type__: String
-
 #### isFlashAvailable
 
-Only works after the scanner was started. Call _startScanner()_ first. __Read only.__
+Only works after the scanner was started. Call _startScanning()_ first. __Read only.__
 
 __Type__: Boolean
 
 #### torchState
 
-Can be used to turn flash on/off. See also _turnFlash()_. Only works after the scanner was started. Call _startScanner()_ first.
+Can be used to turn flash on/off. See also _turnFlash()_. Only works after the scanner was started. Call _startScanning()_ first.
 
 __Type__: Boolean
 
 #### isFocusing
 
-Only works after the scanner was started. Call _startScanner()_ first.
+Only works after the scanner was started. Call _startScanning()_ first.
 __iOS only.__
 
 __Type__: Boolean
 
 #### useFrontCamera
 
-Only works after the scanner was started. Call _startScanner()_ first.
+Only works after the scanner was started. Call _startScanning()_ first.
 __iOS only.__
 
 __Type__: Boolean
 
 #### exposureLock
 
-Only works after the scanner was started. Call _startScanner()_ first.
+Only works after the scanner was started. Call _startScanning()_ first.
 __iOS only.__
 
 __Type__: Boolean
 
 #### activeRect
 
-Only works after the scanner was started. Call _startScanner()_ first.
+Only works after the scanner was started. Call _startScanning()_ first.
 
 __Type__: Rectangle object with x, y, width, and height properties of float type. 
 
 #### orientation
 
-Only works after the scanner was started. Call _startScanner()_ first. __iOS only.__
+Only works after the scanner was started. Call _startScanning()_ first. __iOS only.__
 
 __Type__: Integer
 
@@ -297,7 +293,7 @@ of every supported barcode type is on. __Android only.__
 
 __Type__: Integer
 
-#### startScanner(<parameter object>)
+#### startScanning(<parameter object>)
 
 Brings up the camera preview and starts the scanner.
 
@@ -357,7 +353,7 @@ __Return type__: void
 
 #### scannerActivated event
 
-Fired after the _startScanner()_ function completes the initialization of the
+Fired after the _startScanning()_ function completes the initialization of the
 scanner. This event does not have any properties.
 
 #### scannerStatusUpdated event
