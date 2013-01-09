@@ -314,7 +314,3 @@ infoTextField = Ti.UI.createTextArea({
 win.add(infoTextField);
 
 win.open();
-	
-Ti.Gesture.addEventListener('orientationchange', function(e) {
-	Ti.API.info('received orientationchange event');
-});
