@@ -92,7 +92,9 @@ public class ScannerActivity extends BarcodeScanActivity {
 		if (activeRect != null) {
 			setActiveRect(activeRect);
 		}
-		moduleInstance.fireEvent("scannerActivated", null);
+		if (moduleInstance.hasListeners("scannerActivated")) {
+			moduleInstance.fireEvent("scannerActivated", null);
+		}
 	}
 
 	@Override
@@ -106,39 +108,41 @@ public class ScannerActivity extends BarcodeScanActivity {
 
 	@Override
 	protected void onScanStatusUpdate(Map<String, Object> scanStatus) {
-		KrollDict event = new KrollDict();
-		ArrayList<BarcodeResultProxy> jsAllResults = new ArrayList<BarcodeResultProxy>();
-		ArrayList<BarcodeResultProxy> jsNewResults = new ArrayList<BarcodeResultProxy>();
-
-	    @SuppressWarnings(value = "unchecked")
-		Set<BarcodeResult> allResults = (Set<BarcodeResult>) scanStatus.get(Status.STATUS_FOUND_BARCODES);
-		for (BarcodeResult bcr : allResults) {
-			jsAllResults.add(new BarcodeResultProxy(bcr));
-		}
-		event.put("foundBarcodes", jsAllResults.toArray());
-
-	    @SuppressWarnings(value = "unchecked")
-		Set<BarcodeResult> newResults = (Set<BarcodeResult>) scanStatus.get(Status.STATUS_NEW_FOUND_BARCODES);
-		for (BarcodeResult bcr : newResults) {
-			jsNewResults.add(new BarcodeResultProxy(bcr));
-		}
-		event.put("newFoundBarcodes", jsNewResults.toArray());
-
-		event.put("inRange", scanStatus.get(Status.STATUS_IN_RANGE));
-		event.put("guidance", scanStatus.get(Status.STATUS_GUIDANCE));
-
-		if (scanStatus.containsKey(Status.STATUS_PARTIAL_BARCODE)) {
-			event.put("partialBarcode", new BarcodeResultProxy(((BarcodeResult)scanStatus.get(Status.STATUS_PARTIAL_BARCODE))));
-		}
-
-		if (scanStatus.containsKey(Status.STATUS_GUIDANCE)) {
+		if (moduleInstance.hasListeners("scannerStatusUpdated")) {
+			KrollDict event = new KrollDict();
+			ArrayList<BarcodeResultProxy> jsAllResults = new ArrayList<BarcodeResultProxy>();
+			ArrayList<BarcodeResultProxy> jsNewResults = new ArrayList<BarcodeResultProxy>();
+	
+		    @SuppressWarnings(value = "unchecked")
+			Set<BarcodeResult> allResults = (Set<BarcodeResult>) scanStatus.get(Status.STATUS_FOUND_BARCODES);
+			for (BarcodeResult bcr : allResults) {
+				jsAllResults.add(new BarcodeResultProxy(bcr));
+			}
+			event.put("foundBarcodes", jsAllResults.toArray());
+	
+		    @SuppressWarnings(value = "unchecked")
+			Set<BarcodeResult> newResults = (Set<BarcodeResult>) scanStatus.get(Status.STATUS_NEW_FOUND_BARCODES);
+			for (BarcodeResult bcr : newResults) {
+				jsNewResults.add(new BarcodeResultProxy(bcr));
+			}
+			event.put("newFoundBarcodes", jsNewResults.toArray());
+	
+			event.put("inRange", scanStatus.get(Status.STATUS_IN_RANGE));
 			event.put("guidance", scanStatus.get(Status.STATUS_GUIDANCE));
+	
+			if (scanStatus.containsKey(Status.STATUS_PARTIAL_BARCODE)) {
+				event.put("partialBarcode", new BarcodeResultProxy(((BarcodeResult)scanStatus.get(Status.STATUS_PARTIAL_BARCODE))));
+			}
+	
+			if (scanStatus.containsKey(Status.STATUS_GUIDANCE)) {
+				event.put("guidance", scanStatus.get(Status.STATUS_GUIDANCE));
+			}
+			
+			if (scanStatus.containsKey(Status.STATUS_CAMERA_SNAPSHOT)) {
+				event.put("cameraSnapshot", new BufferProxy(((byte[])scanStatus.get(Status.STATUS_CAMERA_SNAPSHOT))));
+			}
+			moduleInstance.fireEvent("scannerStatusUpdated", event);
 		}
-		
-		if (scanStatus.containsKey(Status.STATUS_CAMERA_SNAPSHOT)) {
-			event.put("cameraSnapshot", new BufferProxy(((byte[])scanStatus.get(Status.STATUS_CAMERA_SNAPSHOT))));
-		}
-		moduleInstance.fireEvent("scannerStatusUpdated", event);
 	}
 
 	/** BarcodeScanActivity queries this method during onCreate() to determine which
@@ -165,9 +169,7 @@ public class ScannerActivity extends BarcodeScanActivity {
 	}
 
 	public void setActiveRect(Rect activeRect) {
-		if (activeRect == null) {
-			Log.d(LCAT, "ZZZ activeRect is null!!!");
-		} else {
+		if (activeRect != null) {
 			super.setActiveRect(activeRect);
 		}
 	}
@@ -190,20 +192,25 @@ public class ScannerActivity extends BarcodeScanActivity {
 	
 	@Override
 	public void onBackPressed() {
-		moduleInstance.fireEvent("backButtonPressed", null);
+		if (moduleInstance.hasListeners("backButtonPressed")) {
+			moduleInstance.fireEvent("backButtonPressed", null);
+		}
 	}
 
 	@Override
 	public void onCameraError(int error) {
-		KrollDict event = new KrollDict();
-		event.put("errorCode", error);
-		moduleInstance.fireEvent("cameraError", event);
+		if (moduleInstance.hasListeners("cameraError")) {
+			KrollDict event = new KrollDict();
+			event.put("errorCode", error);
+			moduleInstance.fireEvent("cameraError", event);
+		}
 	}
 	
 	@Override
 	public void enabledBarcodeTypesChanged() {
-		Log.d(LCAT, "ZZZ: enabledBarcodeTypesChanged");
-		moduleInstance.fireEvent("enabledBarcodeTypesChanged", null);
+		if (moduleInstance.hasListeners("enabledBarcodeTypesChanged")) {
+			moduleInstance.fireEvent("enabledBarcodeTypesChanged", null);
+		}
 	}
 	
 //	@Override
