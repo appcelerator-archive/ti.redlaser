@@ -153,7 +153,9 @@ MAKE_SYSTEM_PROP(STATUS_SCAN_LIMIT_REACHED,RLState_ScanLimitReached);
             
         }
         [[[TiApp app] controller] manuallyRotateToOrientation:UIInterfaceOrientationPortrait duration:[[[TiApp app] controller] suggestedRotationDuration]];
-        [self fireEvent:@"scannerActivated"];
+        if ([self _hasListeners:@"scannerActivated"]) {
+            [self fireEvent:@"scannerActivated"];
+        }
     } else {
         NSLog(@"[WARN] Received call to startScanning while scanner is already active.");
     }
@@ -162,17 +164,19 @@ MAKE_SYSTEM_PROP(STATUS_SCAN_LIMIT_REACHED,RLState_ScanLimitReached);
 -(void)barcodePickerController:(BarcodePickerController*)picker
                    returnResults:(NSSet *)results;
 {
-    NSMutableDictionary *jsEvent = [NSMutableDictionary dictionary];
-    NSMutableArray *jsResults = [NSMutableArray arrayWithCapacity:[results count]];
-    for (BarcodeResult *result in results) {
-        if ([result isKindOfClass:[BarcodeResult class]]) {
-            [jsResults addObject:[BarcodeResultProxy withBarcodeResult:result]];
-        } else {
-            NSLog(@"[WARN] Unexpected object type in barcodePickerController:returnResults.");
+    if ([self _hasListeners:@"scannerReturnedResults"]) {
+        NSMutableDictionary *jsEvent = [NSMutableDictionary dictionary];
+        NSMutableArray *jsResults = [NSMutableArray arrayWithCapacity:[results count]];
+        for (BarcodeResult *result in results) {
+            if ([result isKindOfClass:[BarcodeResult class]]) {
+                [jsResults addObject:[BarcodeResultProxy withBarcodeResult:result]];
+            } else {
+                NSLog(@"[WARN] Unexpected object type in barcodePickerController:returnResults.");
+            }
         }
+        [jsEvent setObject:jsResults forKey:@"foundBarcodes"];
+        [self fireEvent:@"scannerReturnedResults" withObject:jsEvent];
     }
-    [jsEvent setObject:jsResults forKey:@"foundBarcodes"];
-    [self fireEvent:@"scannerReturnedResults" withObject:jsEvent];
 }
 
 -(NSArray*)findBarcodesInBlob:(id)theBlob
