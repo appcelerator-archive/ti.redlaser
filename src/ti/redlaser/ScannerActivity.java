@@ -37,7 +37,6 @@ public class ScannerActivity extends BarcodeScanActivity {
     @Override
     public void onCreate(Bundle bundle) 
     {    	    	
-    	Log.d(LCAT, "ZZZ: entering onCreate");
 		activeInstance = this;
 
     	overlayNativeView = overlayProxy.getOrCreateView().getNativeView();
@@ -77,14 +76,11 @@ public class ScannerActivity extends BarcodeScanActivity {
     @Override
     public void onStart() 
     {    	    	
-    	Log.d(LCAT, "ZZZ: entering onStart");
     	super.onStart();
     }
     
 	@Override
 	protected void onResume() {
-		Log.d(LCAT, "ZZZ: entering onResume");
-
 		super.onResume();
 
 		previewLayout.addView(overlayNativeView, new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
@@ -99,7 +95,6 @@ public class ScannerActivity extends BarcodeScanActivity {
 
 	@Override
 	protected void onPause() {
-		Log.d(LCAT, "ZZZ: entering onResume");
 		super.onPause();
 
 		previewLayout.removeView(overlayNativeView);
