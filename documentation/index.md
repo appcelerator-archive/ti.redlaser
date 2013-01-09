@@ -349,7 +349,7 @@ __Return type__: void
 
 #### findBarcodesInBlob(<TiBlob>)
 
-__Return type__: Array of _BarcodeResult_ objects.
+__Return type__: Array of _BarcodeResult_ objects. __iOS only.__
 
 #### turnFlash(boolean)
 
