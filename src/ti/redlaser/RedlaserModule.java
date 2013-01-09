@@ -72,7 +72,6 @@ public class RedlaserModule extends KrollModule
 		if (DBG) {
 			Log.d(LCAT, "inside onAppCreate of Red Laser module");
 		}
-		Log.d(LCAT, "ZZZ: package name: " + app.getPackageName());
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -117,7 +116,6 @@ public class RedlaserModule extends KrollModule
 	@Kroll.method
 	public void doneScanning()
 	{
-		Log.d(LCAT, "ZZZ: Entering doneScanning");
 		ScannerActivity.activeInstance.doneScanning();
 	}
 	
@@ -298,12 +296,9 @@ public class RedlaserModule extends KrollModule
 	@Kroll.setProperty
 	public void setScanEan13(Boolean value)
 	{
-		Log.d(LCAT, "ZZZ: Entereing setScanEan13 with value " + value);
 		if (ScannerActivity.activeInstance != null) {
-			Log.d(LCAT, "ZZZ: activeInstance is not null");
 			ScannerActivity.activeInstance.enabledTypes.setEan13(value);
 		}
-		Log.d(LCAT, "ZZZ: returning from setScanEan13");
 	}
 	
 	@Kroll.getProperty

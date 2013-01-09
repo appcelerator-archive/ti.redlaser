@@ -145,14 +145,11 @@ public class ScannerActivity extends BarcodeScanActivity {
 		}
 	}
 
-	/** BarcodeScanActivity queries this method during onCreate() to determine which
-	 *  orientation it should use.
-	 */
-//	@Override
-//	public String getOrientationSetting() 
-//	{
-//		return prefOrientation;
-//	}
+	@Override
+	public String getOrientationSetting() 
+	{
+		return prefOrientation;
+	}
 	
 	@Override
 	protected android.widget.FrameLayout getPreviewView()
@@ -211,11 +208,5 @@ public class ScannerActivity extends BarcodeScanActivity {
 		if (moduleInstance.hasListeners("enabledBarcodeTypesChanged")) {
 			moduleInstance.fireEvent("enabledBarcodeTypesChanged", null);
 		}
-	}
-	
-//	@Override
-//	public void onConfigurationChanged(Configuration newConfig)
-//	{
-//		Log.d(LCAT, "ZZZ: entering onConfigurationChanged");
-//	}
+	}	
 }
