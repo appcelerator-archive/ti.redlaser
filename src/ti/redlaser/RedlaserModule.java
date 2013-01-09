@@ -108,7 +108,7 @@ public class RedlaserModule extends KrollModule
 			TiApplication.getAppRootOrCurrentActivity().startActivityForResult(scanIntent,1);
 		} catch(Exception e)
 		{
-			Log.d("RLSample",e.getLocalizedMessage()+" "+e.getCause());
+			Log.d(LCAT, e.getLocalizedMessage() + " " + e.getCause());
 		}
 
 	}
