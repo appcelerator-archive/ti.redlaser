@@ -21,6 +21,19 @@ for a newly generated license to become active. During this time you may receive
 error messages indicating a problem with the license file, even though there
 is nothing wrong with the file or its placement.
 
+## Dependencies
+
+This module requires Release 2.1.3 or newer of the Titanium SDK.
+
+This module does not include support for the ARMv6 architecture on iOS.
+Refer to the Titanium Mobile 2.1.3.RC Release Notes
+for further details about ARMv6 support.
+
+## Getting Started
+
+View the Using Titanium Modules document for instructions on getting
+started with using this module in your application.
+
 ## Accessing the RedLaser Module
 
 To access this module from JavaScript, you would do the following:
