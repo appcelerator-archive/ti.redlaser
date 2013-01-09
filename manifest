@@ -14,5 +14,5 @@ copyright: Copyright (c) 2011-2012 by Appcelerator,  Inc.
 name: redlaser
 moduleid: ti.redlaser
 guid: 5732454f-aff6-4836-b38d-b50fd1774395
-platform: android
+platform: iphone
 minsdk: 2.1.3.GA
