@@ -114,7 +114,7 @@ MAKE_SYSTEM_PROP(STATUS_SCAN_LIMIT_REACHED,RLState_ScanLimitReached);
         picker = [[BarcodePickerController alloc] init];
         picker.delegate = self;
 
-        overlayViewProxy = [params objectForKey:@"overlay"];
+        overlayViewProxy = [[params objectForKey:@"overlay"] retain];
         if (overlayViewProxy) {
             ENSURE_TYPE(overlayViewProxy, TiViewProxy);
             // Blaine made the suggestion to call rememberProxy before anything else.
@@ -126,7 +126,6 @@ MAKE_SYSTEM_PROP(STATUS_SCAN_LIMIT_REACHED,RLState_ScanLimitReached);
         }
 
         if (overlayViewProxy) {
-            
             // This is what the showPicker method in MediaModule.m does:
             //
             //        [TiUtils setView:overlayViewProxy.view positionRect:CGRectMake(0, 0, 320, 460)];
@@ -157,8 +156,8 @@ MAKE_SYSTEM_PROP(STATUS_SCAN_LIMIT_REACHED,RLState_ScanLimitReached);
             [overlayViewProxy windowDidOpen];
             [overlayViewProxy layoutChildren:NO];
             [picker setWantsFullScreenLayout:YES];
-            
         }
+        
         [[[TiApp app] controller] manuallyRotateToOrientation:UIInterfaceOrientationPortrait duration:[[[TiApp app] controller] suggestedRotationDuration]];
         if ([self _hasListeners:@"scannerActivated"]) {
             [self fireEvent:@"scannerActivated"];
