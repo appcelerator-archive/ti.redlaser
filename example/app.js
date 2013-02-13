@@ -127,6 +127,27 @@ overlayView = Ti.UI.createView({
 	borderColor: 'blue', borderWidth: 3
 });
 
+if (ANDROID) {
+	cameraIndexLabel = Ti.UI.createLabel({
+		color: 'black', backgroundColor: 'white',
+		text: 'Camera index: ',
+		bottom: '15%', left: '3%', height: '10%', width: '30%'
+	});
+	
+	cameraIndexField = Ti.UI.createTextField({
+		bottom: '15%', left: '35%', height: '10%', width: '30%'
+	});
+	
+	cameraPreview = RedLaser.createCameraPreview({
+		width: '100%', height: '100%'
+		// Android Only: The size and postion of the camera preview view can be set here
+	});
+	
+	win.add(cameraIndexLabel);
+	win.add(cameraIndexField);
+	overlayView.add(cameraPreview);
+}
+
 doneButton = Ti.UI.createButton({
 	width: '30%', height: '10%', bottom: '3%', left: '2%',
 	title: 'Done'
@@ -212,27 +233,6 @@ snapshotImageView = Ti.UI.createImageView({
 
 win.add(snapshotImageView);
 
-cameraIndexLabel = Ti.UI.createLabel({
-	color: 'black', backgroundColor: 'white',
-	text: 'Camera index: ',
-	bottom: '15%', left: '3%', height: '10%', width: '30%'
-});
-
-cameraIndexField = Ti.UI.createTextField({
-	bottom: '15%', left: '35%', height: '10%', width: '30%'
-});
-
-if (ANDROID) {
-	cameraPreview = RedLaser.createCameraPreview({
-		top: '25%', left: '25%', width: '50%', height: '50%',
-		borderColor: 'red', borderWidth: 2
-	});
-	
-	win.add(cameraIndexLabel);
-	win.add(cameraIndexField);
-	overlayView.add(cameraPreview);
-}
-
 RedLaser.addEventListener('scannerActivated', function() {
 	Ti.API.info('scannerActivated event received.');
 
@@ -291,7 +291,7 @@ startScanningButton.addEventListener('click', function() {
 		overlay: overlayView,
 		orientation: RedLaser.PREF_ORIENTATION_PORTRAIT,
 		cameraPreview: cameraPreview,
-		cameraIndex: parseInt(cameraIndexField.value, 10)
+		cameraIndex: cameraIndexField ? parseInt(cameraIndexField.value, 10) : undefined
 	});
 });
 
