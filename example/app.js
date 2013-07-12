@@ -244,19 +244,19 @@ RedLaser.addEventListener('scannerActivated', function() {
 		torchButton.title = 'No torch';
 	}
 	
-	// All barcode types are enabled by default. Here we turn off most of them
-	// to improve performance.
-	RedLaser.scanSticky = false;
-	RedLaser.scanCodabar = false;
-	RedLaser.scanCode39 = false;
-	RedLaser.scanCode93 = false;
-	RedLaser.scanDataMatrix = false;
-	RedLaser.scanEan2 = false;
-	RedLaser.scanEan5 = false;
-	RedLaser.scanEan8 = false;
-	RedLaser.scanITF = false;
-	RedLaser.scanRSS14 = false;
-	RedLaser.scanSticky = false;
+	// All barcode types are enabled by default. 
+	// Turning some of them off can improve performance.
+	// RedLaser.scanSticky = false;
+	// RedLaser.scanCodabar = false;
+	// RedLaser.scanCode39 = false;
+	// RedLaser.scanCode93 = false;
+	// RedLaser.scanDataMatrix = false;
+	// RedLaser.scanEan2 = false;
+	// RedLaser.scanEan5 = false;
+	// RedLaser.scanEan8 = false;
+	// RedLaser.scanITF = false;
+	// RedLaser.scanRSS14 = false;
+	// RedLaser.scanSticky = false;
 });
 
 RedLaser.addEventListener('backButtonPressed', function (e) {

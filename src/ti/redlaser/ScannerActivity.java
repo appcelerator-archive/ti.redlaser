@@ -213,6 +213,7 @@ public class ScannerActivity extends BarcodeScanActivity {
 	
 	@Override
 	public void enabledBarcodeTypesChanged() {
+		super.enabledBarcodeTypesChanged();
 		if (moduleInstance.hasListeners("enabledBarcodeTypesChanged")) {
 			moduleInstance.fireEvent("enabledBarcodeTypesChanged", null);
 		}
