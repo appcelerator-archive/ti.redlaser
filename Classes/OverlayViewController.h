@@ -1,15 +1,8 @@
-//
-//  OverlayViewController.h
-//  redlaser
-//
-//  Created by: 
-//  	Zsombor Papp	zsombor.papp@logicallabs.com
-//  	Logical Labs	titanium@logicallabs.com
-//
-//  Created on 11/1/12
-//
-//  Copyright (c) 2009-2012 by Appcelerator, Inc. All Rights Reserved.
-//
+/**
+ * Appcelerator Titanium Mobile Modules
+ * Copyright (c) 2012-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Proprietary and Confidential - This source code is not for redistribution
+ */
 
 #import "RedLaserSDK.h"
 #import "TiUtils.h"

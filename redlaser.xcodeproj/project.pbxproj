@@ -35,6 +35,10 @@
 		8F534CF11643600C001D00EB /* OverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F534CEF1643600C001D00EB /* OverlayViewController.m */; };
 		AA747D9F0F9514B9006C5449 /* TiRedlaser_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiRedlaser_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		CE6B987217B1E20100B9A2D8 /* TiRedlaserCameraPreview.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6B987017B1E20100B9A2D8 /* TiRedlaserCameraPreview.h */; };
+		CE6B987317B1E20100B9A2D8 /* TiRedlaserCameraPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6B987117B1E20100B9A2D8 /* TiRedlaserCameraPreview.m */; };
+		CEC2C37717AAFEAE0015322C /* TiRedlaserCameraPreviewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = CEC2C37517AAFEAE0015322C /* TiRedlaserCameraPreviewProxy.h */; };
+		CEC2C37817AAFEAE0015322C /* TiRedlaserCameraPreviewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC2C37617AAFEAE0015322C /* TiRedlaserCameraPreviewProxy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +66,10 @@
 		8F534CEF1643600C001D00EB /* OverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OverlayViewController.m; path = Classes/OverlayViewController.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* TiRedlaser_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiRedlaser_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CE6B987017B1E20100B9A2D8 /* TiRedlaserCameraPreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiRedlaserCameraPreview.h; path = Classes/TiRedlaserCameraPreview.h; sourceTree = "<group>"; };
+		CE6B987117B1E20100B9A2D8 /* TiRedlaserCameraPreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiRedlaserCameraPreview.m; path = Classes/TiRedlaserCameraPreview.m; sourceTree = "<group>"; };
+		CEC2C37517AAFEAE0015322C /* TiRedlaserCameraPreviewProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiRedlaserCameraPreviewProxy.h; path = Classes/TiRedlaserCameraPreviewProxy.h; sourceTree = "<group>"; };
+		CEC2C37617AAFEAE0015322C /* TiRedlaserCameraPreviewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiRedlaserCameraPreviewProxy.m; path = Classes/TiRedlaserCameraPreviewProxy.m; sourceTree = "<group>"; };
 		D2AAC07E0554694100DB518D /* libTiRedlaser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTiRedlaser.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -115,10 +123,14 @@
 				24DE9E1011C5FE74003F90F6 /* TiRedlaserModuleAssets.m */,
 				24DD6CF71134B3F500162E58 /* TiRedlaserModule.h */,
 				24DD6CF81134B3F500162E58 /* TiRedlaserModule.m */,
+				CE6B987017B1E20100B9A2D8 /* TiRedlaserCameraPreview.h */,
+				CE6B987117B1E20100B9A2D8 /* TiRedlaserCameraPreview.m */,
 				8F534CEE1643600C001D00EB /* OverlayViewController.h */,
 				8F534CEF1643600C001D00EB /* OverlayViewController.m */,
 				8F534CD91642C0AA001D00EB /* BarcodeResultProxy.h */,
 				8F534CDA1642C0AA001D00EB /* BarcodeResultProxy.m */,
+				CEC2C37517AAFEAE0015322C /* TiRedlaserCameraPreviewProxy.h */,
+				CEC2C37617AAFEAE0015322C /* TiRedlaserCameraPreviewProxy.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -154,6 +166,8 @@
 				8F534CD416420748001D00EB /* RedLaserSDK.h in Headers */,
 				8F534CDB1642C0AA001D00EB /* BarcodeResultProxy.h in Headers */,
 				8F534CF01643600C001D00EB /* OverlayViewController.h in Headers */,
+				CEC2C37717AAFEAE0015322C /* TiRedlaserCameraPreviewProxy.h in Headers */,
+				CE6B987217B1E20100B9A2D8 /* TiRedlaserCameraPreview.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +242,8 @@
 				24DE9E1211C5FE74003F90F6 /* TiRedlaserModuleAssets.m in Sources */,
 				8F534CDC1642C0AA001D00EB /* BarcodeResultProxy.m in Sources */,
 				8F534CF11643600C001D00EB /* OverlayViewController.m in Sources */,
+				CEC2C37817AAFEAE0015322C /* TiRedlaserCameraPreviewProxy.m in Sources */,
+				CE6B987317B1E20100B9A2D8 /* TiRedlaserCameraPreview.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

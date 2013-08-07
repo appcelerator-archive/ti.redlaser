@@ -1,22 +1,15 @@
-//  TiRedLaserModule.m
-//  redlaser
-//
-//  Created by: 
-//  	Zsombor Papp	zsombor.papp@logicallabs.com
-//  	Logical Labs	titanium@logicallabs.com
-//
-//  Created on 11/1/12
-//
-//  Copyright (c) 2009-2012 by Appcelerator, Inc. All Rights Reserved.
-//
-
+/**
+ * Appcelerator Titanium Mobile Modules
+ * Copyright (c) 2012-2013 by Appcelerator, Inc. All Rights Reserved.
+ * Proprietary and Confidential - This source code is not for redistribution
+ */
 
 #import "TiRedlaserModule.h"
 #import "TiBase.h"
 #import "TiHost.h"
 #import "TiUtils.h"
 
-#import <objc/runtime.h>
+#import "TiRedlaserCameraPreviewProxy.h"
 
 @implementation TiRedlaserModule
 
@@ -72,6 +65,7 @@ MAKE_SYSTEM_PROP(STATUS_SCAN_LIMIT_REACHED,RLState_ScanLimitReached);
 	// typically this is during shutdown. make sure you don't do too
 	// much processing here or the app will be quit forceably
 	
+    RELEASE_TO_NIL(picker);
 	// you *must* call the superclass
 	[super shutdown:sender];
 }
@@ -110,60 +104,102 @@ MAKE_SYSTEM_PROP(STATUS_SCAN_LIMIT_REACHED,RLState_ScanLimitReached);
     ENSURE_UI_THREAD(startScanning,params);
     ENSURE_SINGLE_ARG(params, NSDictionary);
     
+    id overlayViewProxy_ = [params objectForKey:@"overlay"];
+    ENSURE_TYPE_OR_NIL(overlayViewProxy_, TiViewProxy);
+    
+    id cameraPreview_ = [params objectForKey:@"cameraPreview"];
+    ENSURE_TYPE_OR_NIL(cameraPreview_, TiRedlaserCameraPreviewProxy);
+    
     if (picker == nil) {
         picker = [[BarcodePickerController alloc] init];
         picker.delegate = self;
-
-        overlayViewProxy = [[params objectForKey:@"overlay"] retain];
-        if (overlayViewProxy) {
-            ENSURE_TYPE(overlayViewProxy, TiViewProxy);
-            // Blaine made the suggestion to call rememberProxy before anything else.
+        
+        overlayViewController = [[OverlayViewController alloc] initWithModule:self];
+        
+        if (overlayViewProxy_ != nil) {
+            overlayViewProxy = [overlayViewProxy_ retain];
             [self rememberProxy:overlayViewProxy];
-
-            overlayViewController = [[OverlayViewController alloc] initWithModule:self];
-            [overlayViewController.view addSubview:overlayViewProxy.view];
+        } 
+        
+        if (cameraPreview_ != nil) {
+            cameraPreview = [cameraPreview_ retain];
+            [self rememberProxy:cameraPreview];
+            
+            [cameraPreview startScanningWithPicker:picker
+                                overlayViewProxy:overlayViewProxy
+                               overlayViewController:overlayViewController];
+        } else {
             [picker setOverlay:overlayViewController];
-        }
-
-        if (overlayViewProxy) {
-            // This is what the showPicker method in MediaModule.m does:
-            //
-            //        [TiUtils setView:overlayViewProxy.view positionRect:CGRectMake(0, 0, 320, 460)];
-            
+            [[UIApplication sharedApplication] setStatusBarHidden:YES];
             [TiUtils setView:overlayViewProxy.view positionRect:[picker view].bounds];
-            //        [overlayViewProxy setSandboxBounds:CGRectMake(0, 0, 320, 460)];
-            //        overlayViewProxy.view.center = CGPointMake(160, 210);
-            //        overlayViewProxy.view.bounds = CGRectMake(0, 0, 320, 460);
-            [overlayViewProxy windowWillOpen];
-            [overlayViewProxy windowDidOpen];
-            [overlayViewProxy layoutChildren:NO];
-            [picker setWantsFullScreenLayout:YES];
+        }
+        
+        if (overlayViewProxy != nil) {
+            [overlayViewController.view addSubview:overlayViewProxy.view];
             
-            //
-            // The following commented-out lines were my interpretation of what
-            // the view proxy 'add' method would do.
-            //
-            //        [overlayViewProxy parentWillShow];
-            //        [overlayViewProxy setSandboxBounds:CGRectMake(0, 0, 320, 460)];
-            //        overlayViewProxy.view.autoresizingMask = UIViewAutoresizingNone;
-            //        overlayViewProxy.view.center = CGPointMake(160, 210);
-            //        overlayViewProxy.view.bounds = CGRectMake(0, 0, 320, 460);
-            //        [overlayViewProxy layoutChildren:NO];
-        }
-        
-        [[TiApp app] showModalController:picker animated:YES];
-        if (overlayViewProxy) {
+            [overlayViewProxy windowWillOpen];
+            [overlayViewProxy setParentVisible:YES];
             [overlayViewProxy windowDidOpen];
-            [overlayViewProxy layoutChildren:NO];
-            [picker setWantsFullScreenLayout:YES];
         }
         
-        [[[TiApp app] controller] manuallyRotateToOrientation:UIInterfaceOrientationPortrait duration:[[[TiApp app] controller] suggestedRotationDuration]];
+        if (cameraPreview_ == nil) {
+            // If cameraPreview not provided then show the controller
+            // Must be called after addSubview
+            [[TiApp app] showModalController:picker animated:YES];
+        }
+        
+        if (overlayViewProxy != nil) {
+            // layoutChildren must be called after `showModalController` to avoid layout
+            // issues when showing picker in different orientations
+            [overlayViewProxy layoutChildren:NO];
+        }
+        
         if ([self _hasListeners:@"scannerActivated"]) {
             [self fireEvent:@"scannerActivated"];
         }
     } else {
         NSLog(@"[WARN] Received call to startScanning while scanner is already active.");
+    }
+}
+
+-(void)doneScanning:(id)unused
+{
+    ENSURE_UI_THREAD(doneScanning,unused);
+    
+    if (picker != nil) {
+        [picker doneScanning];
+        
+        if (cameraPreview != nil) {
+            [cameraPreview doneScanning];
+        }
+        
+        if (overlayViewProxy != nil) {
+            [overlayViewProxy windowWillClose];
+        }
+        
+        // If no cameraPreview, dismiss the viewConstroller
+        if (cameraPreview == nil) {
+            [picker dismissViewControllerAnimated:TRUE completion:nil];
+            [[UIApplication sharedApplication] setStatusBarHidden:NO];
+        }
+        
+        // Remove an release overlay
+        if (overlayViewProxy != nil) {
+            [overlayViewProxy.view removeFromSuperview];
+            [self forgetProxy:overlayViewProxy];
+            RELEASE_TO_NIL(overlayViewProxy);
+        }
+        
+        if (cameraPreview != nil) {
+            [self forgetProxy:cameraPreview];
+            RELEASE_TO_NIL(cameraPreview);
+        }
+        
+        [picker setOverlay:nil];
+        RELEASE_TO_NIL(picker);
+        RELEASE_TO_NIL(overlayViewController);
+    } else {
+        NSLog(@"[WARN] Received call to doneScanning while scanner is not active.");
     }
 }
 
@@ -200,7 +236,6 @@ MAKE_SYSTEM_PROP(STATUS_SCAN_LIMIT_REACHED,RLState_ScanLimitReached);
     }
     return jsResults;
 }
-
 -(void)pauseScanning:(id)unused
 {
     if (picker != nil) {
@@ -238,28 +273,6 @@ MAKE_SYSTEM_PROP(STATUS_SCAN_LIMIT_REACHED,RLState_ScanLimitReached);
         [picker clearResultsSet];
     } else {
         NSLog(@"[WARN] Received call to clearResultsSet while scanner is not active.");
-    }
-}
-
--(void)doneScanning:(id)unused
-{
-    ENSURE_UI_THREAD(doneScanning,unused);
-    
-    if (picker != nil) {
-        if (overlayViewProxy) {
-            [overlayViewProxy windowWillClose];
-        }
-        [picker doneScanning];
-        [picker dismissViewControllerAnimated:TRUE completion:nil];
-        [[UIApplication sharedApplication] setStatusBarHidden:NO];
-        if (overlayViewProxy) {
-            [overlayViewProxy windowDidClose];
-            [self forgetProxy:overlayViewProxy];
-            RELEASE_TO_NIL(overlayViewProxy);
-        }
-        RELEASE_TO_NIL(picker);
-    } else {
-        NSLog(@"[WARN] Received call to doneScanning while scanner is not active.");
     }
 }
 

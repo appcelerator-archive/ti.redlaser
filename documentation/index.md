@@ -55,9 +55,11 @@ The following is a simple example of how to use the RedLaser module:
 	});
 
 	overlayView = Ti.UI.createView({...});
+	cameraPreview = RedLaser.createCameraPreview({...});
 	
 	RedLaser.startScanning({
 		overlay: overlayView,
+		cameraPreview: cameraPreview
 	});
 
 
@@ -310,18 +312,36 @@ __Type__: Integer
 
 Brings up the camera preview and starts the scanner.
 
-__Parameters___
+__Parameters__
 
 * _overlay_: A TiView object that provides a user interface while the camera
 preview is active.
 * _cameraPreview_: A CameraPreview object created by the createCameraPreview
-function. Add this view to the overlay view. The RedLaser SDK will place the
-camera preview into this view. __Android only.__
+function. 
+
+	__Android only:__ Add this view to the overlay view. The RedLaser SDK will place the
+	camera preview into this view.
+	
+	__iOS only:__ Add this view to a parent view or window before calling _startScanning_.
+	If cameraPreview is not passed to _startScanning_, a scanner window will be opened. 
+
 * _cameraIndex_: The index of the desired camera. __Android only.__ See
 _useFrontCamera_ on iOS.
 * _orientation_: Equivalent to _getOrientationSetting_. __Android only.__
 
 __Return type__: void
+
+#### createCameraPreview(<parameter object>)
+
+If the cameraPreview view is added to a [Ti.UI.TabGroup][] it is necessary to call 
+`startScanning` and `doneScanning` when the tab is focused and blured respectively.
+See the example app `tabgroup-app.js`.
+
+__Parameters__
+
+[Ti.UI.View][] parameters
+
+__Return type__: [Ti.UI.View][] that can be passed into _startScanning_ as _cameraPreview_
 
 #### pauseScanning()
 
@@ -474,3 +494,6 @@ Please direct all questions, feedback, and concerns to [info@appcelerator.com](m
 
 ## License
 Copyright(c) 2010-2013 by Appcelerator, Inc. All Rights Reserved. Please see the LICENSE file included in the distribution for further details.
+
+[Ti.UI.View]: http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.View
+[Ti.UI.TabGroup]: http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.TabGroup

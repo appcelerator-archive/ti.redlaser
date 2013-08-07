@@ -1,13 +1,13 @@
 /*jslint sloppy:true */
 
 var
-	IOS = Ti.Platform.osname === 'iphone',
-	ANDROID = Ti.Platform.osname === 'android',
-	defaultInfoText,
-	RedLaser, win, startScanningButton,
-	overlayView, doneButton, pauseButton, resumeButton, torchButton, swapButton,
-	cameraPreview, cameraIndexLabel, cameraIndexField,
-	snapshotButton, snapshotImageView, infoTextField
+    IOS = Ti.Platform.osname === 'iphone',
+    ANDROID = Ti.Platform.osname === 'android',
+    defaultInfoText,
+    RedLaser, win, startScanningButton,
+    overlayView, doneButton, pauseButton, resumeButton, torchButton, swapButton,
+    cameraPreview, cameraIndexLabel, cameraIndexField,
+    snapshotButton, snapshotImageView, infoTextField
 ;
 
 RedLaser = require('ti.redlaser');
@@ -42,257 +42,262 @@ Ti.API.info('STATUS_UNKNOWN_STATE:' + RedLaser.STATUS_UNKNOWN_STATE);
 var firstDiscoveredBarcode;
 
 function logBarcodeResult(barcode) {
-	var locationString, barcodeInfo;
-	
-	barcodeInfo = 'Barcode type: ' + barcode.barcodeType + ' (' + barcode.barcodeTypeString + ')\n';
-	barcodeInfo += 'Barcode string: ' + barcode.barcodeString + '\n';
-	barcodeInfo += 'Extended barcode string: ' + barcode.extendedBarcodeString + '\n';
-	barcodeInfo += 'First scan time: ' + barcode.firstScanTime + '\n';
-	barcodeInfo += 'Most recent scan time: ' + barcode.mostRecentScanTime  + '\n';
-	barcodeInfo += 'Unique ID: ' + barcode.uniqueID + '\n';
+    var locationString, barcodeInfo;
+    
+    barcodeInfo = 'Barcode type: ' + barcode.barcodeType + ' (' + barcode.barcodeTypeString + ')\n';
+    barcodeInfo += 'Barcode string: ' + barcode.barcodeString + '\n';
+    barcodeInfo += 'Extended barcode string: ' + barcode.extendedBarcodeString + '\n';
+    barcodeInfo += 'First scan time: ' + barcode.firstScanTime + '\n';
+    barcodeInfo += 'Most recent scan time: ' + barcode.mostRecentScanTime  + '\n';
+    barcodeInfo += 'Unique ID: ' + barcode.uniqueID + '\n';
 
-	locationString = 'Location: ';
-	barcode.barcodeLocation.forEach(function(point) {
-		locationString += '(' + point.x + ', ' + point.y + ') ';
-	});
-	barcodeInfo += locationString + '\n';
-	barcodeInfo += 'Is partial barcode: ' + barcode.isPartialBarcode + '\n';
+    locationString = 'Location: ';
+    barcode.barcodeLocation.forEach(function(point) {
+        locationString += '(' + point.x + ', ' + point.y + ') ';
+    });
+    barcodeInfo += locationString + '\n';
+    barcodeInfo += 'Is partial barcode: ' + barcode.isPartialBarcode + '\n';
 
-	infoTextField.value = barcodeInfo;
-	Ti.API.info(barcodeInfo);
+    infoTextField.value = barcodeInfo;
+    Ti.API.info(barcodeInfo);
 
-	Ti.API.info('Equals itself: ' + barcode.equals(barcode));
-	if (firstDiscoveredBarcode) {
-		Ti.API.info('Equals first discovered barcode: ' + barcode.equals(firstDiscoveredBarcode));
-	} else {
-		firstDiscoveredBarcode = barcode;
-	}
-	
-	if (barcode.associatedBarcode) {
-		Ti.API.info('Associated barcode info:');
-		logBarcodeResult(barcode.associatedBarcode);
-	} else {
-		Ti.API.info('No associated barcode.');
-	}	
+    Ti.API.info('Equals itself: ' + barcode.equals(barcode));
+    if (firstDiscoveredBarcode) {
+        Ti.API.info('Equals first discovered barcode: ' + barcode.equals(firstDiscoveredBarcode));
+    } else {
+        firstDiscoveredBarcode = barcode;
+    }
+    
+    if (barcode.associatedBarcode) {
+        Ti.API.info('Associated barcode info:');
+        logBarcodeResult(barcode.associatedBarcode);
+    } else {
+        Ti.API.info('No associated barcode.');
+    }   
 }
 
 function logStatusUpdate(updateInfo) {
-	Ti.API.info('Received status update with ' + updateInfo.newFoundBarcodes.length + ' new barcode(s).');
-	Ti.API.info('guidance: ' + updateInfo.guidance);
-	Ti.API.info('valid: ' + updateInfo.valid);
-	Ti.API.info('inRange: ' + updateInfo.inRange);
-	Ti.API.info('Number of total barcodes discovered: ' + updateInfo.foundBarcodes.length);
+    Ti.API.info('Received status update with ' + updateInfo.newFoundBarcodes.length + ' new barcode(s).');
+    Ti.API.info('guidance: ' + updateInfo.guidance);
+    Ti.API.info('valid: ' + updateInfo.valid);
+    Ti.API.info('inRange: ' + updateInfo.inRange);
+    Ti.API.info('Number of total barcodes discovered: ' + updateInfo.foundBarcodes.length);
 
-	if (updateInfo.newFoundBarcodes.length) {
-		Ti.Media.vibrate([0, 250]);
-		overlayView.animate({ backgroundColor: 'red', duration: 250}, function() {
-			overlayView.backgroundColor = 'transparent';
-		});
+    if (updateInfo.newFoundBarcodes.length) {
+        Ti.Media.vibrate([0, 250]);
+        overlayView.animate({ backgroundColor: 'red', duration: 250}, function() {
+            overlayView.backgroundColor = 'transparent';
+        });
 
-		Ti.API.info('Details of newly discovered barcode(s):');
-		updateInfo.newFoundBarcodes.forEach(logBarcodeResult);
-	}
-	
-	if (updateInfo.partialBarcode) {
-		if (ANDROID) {
-			// On Android, the partialBarcode property is a BarcodeResult(Proxy)
-			// object.
-			Ti.API.info('Received partial barcode: ');
-			logBarcodeResult(updateInfo.partialBarcode);
-		}
-		if (IOS) {
-			// On iOS, the partialBarcode property is a string.
-			Ti.API.info('Received partial barcode: ' + updateInfo.partialBarcode);
-		}
-	}
-	
-	if (updateInfo.cameraSnapshot) {
-		Ti.API.info('Camera snapshot received length: ' + updateInfo.cameraSnapshot.length);
-		snapshotImageView.image = updateInfo.cameraSnapshot.toBlob();
-	}
+        Ti.API.info('Details of newly discovered barcode(s):');
+        updateInfo.newFoundBarcodes.forEach(logBarcodeResult);
+    }
+    
+    if (updateInfo.partialBarcode) {
+        if (ANDROID) {
+            // On Android, the partialBarcode property is a BarcodeResult(Proxy)
+            // object.
+            Ti.API.info('Received partial barcode: ');
+            logBarcodeResult(updateInfo.partialBarcode);
+        }
+        if (IOS) {
+            // On iOS, the partialBarcode property is a string.
+            Ti.API.info('Received partial barcode: ' + updateInfo.partialBarcode);
+        }
+    }
+    
+    if (updateInfo.cameraSnapshot) {
+        Ti.API.info('Camera snapshot received length: ' + updateInfo.cameraSnapshot.length);
+        snapshotImageView.image = updateInfo.cameraSnapshot.toBlob();
+    }
 }
 
 RedLaser.addEventListener('scannerStatusUpdated', logStatusUpdate);
 RedLaser.addEventListener('scannerReturnedResults', function(e) {
-	// This event is iOS only.
-	Ti.API.info('Received scannerReturnedResults event.');
-	e.foundBarcodes.forEach(logBarcodeResult);
+    // This event is iOS only.
+    Ti.API.info('Received scannerReturnedResults event.');
+    e.foundBarcodes.forEach(logBarcodeResult);
 });
 
 win = Ti.UI.createWindow({
-	backgroundColor: 'black'
+    backgroundColor: 'black'
 });
 
 overlayView = Ti.UI.createView({
-	borderColor: 'blue', borderWidth: 3
+    borderColor: 'blue', borderWidth: 3
+});
+
+cameraPreview = RedLaser.createCameraPreview({
+    width: '100%', height: '100%'
+    // The size and postion of the camera preview view can be set here
 });
 
 if (ANDROID) {
-	cameraIndexLabel = Ti.UI.createLabel({
-		color: 'black', backgroundColor: 'white',
-		text: 'Camera index: ',
-		bottom: '15%', left: '3%', height: '10%', width: '30%'
-	});
-	
-	cameraIndexField = Ti.UI.createTextField({
-		bottom: '15%', left: '35%', height: '10%', width: '30%'
-	});
-	
-	cameraPreview = RedLaser.createCameraPreview({
-		width: '100%', height: '100%'
-		// Android Only: The size and postion of the camera preview view can be set here
-	});
-	
-	win.add(cameraIndexLabel);
-	win.add(cameraIndexField);
-	overlayView.add(cameraPreview);
+    cameraIndexLabel = Ti.UI.createLabel({
+        color: 'black', backgroundColor: 'white',
+        text: 'Camera index: ',
+        bottom: '15%', left: '3%', height: '10%', width: '30%'
+    });
+    
+    cameraIndexField = Ti.UI.createTextField({
+        bottom: '15%', left: '35%', height: '10%', width: '30%'
+    });
+    
+    win.add(cameraIndexLabel);
+    win.add(cameraIndexField);
+    overlayView.add(cameraPreview); // Android Only: The preview view is added to the overlayView
 }
 
 doneButton = Ti.UI.createButton({
-	width: '30%', height: '10%', bottom: '3%', left: '2%',
-	title: 'Done'
+    width: '30%', height: '10%', bottom: '3%', left: '2%',
+    title: 'Done'
 });
 
 doneButton.addEventListener('click', function() {
-	RedLaser.doneScanning();
-	if (IOS) {
-		pauseButton.enabled = true;
-		resumeButton.enabled = false;
-	}
+    RedLaser.doneScanning();
+    if (IOS) {
+        win.remove(cameraPreview);
+        pauseButton.enabled = true;
+        resumeButton.enabled = false;
+    }
 });
 
 overlayView.add(doneButton);
 
 if (IOS) {
-	// Pause/resume/camera swap function is not available on Android 
-	swapButton = Ti.UI.createButton({
-		width: '30%', height: '10%', top: '3%', left: '34%',
-		title: 'Swap'
-	});
-	
-	swapButton.addEventListener('click', function() {
-		RedLaser.useFrontCamera = !RedLaser.useFrontCamera; 
-	});
-	
-	overlayView.add(swapButton);
-	
-	pauseButton = Ti.UI.createButton({
-		width: '30%', height: '10%', bottom: '3%', left: '34%',
-		title: 'Pause'
-	});
-	
-	pauseButton.addEventListener('click', function() {
-		pauseButton.enabled = false;
-		RedLaser.pauseScanning();
-		resumeButton.enabled = true;
-	});
-	
-	overlayView.add(pauseButton);
-	
-	resumeButton = Ti.UI.createButton({
-		width: '30%', height: '10%', bottom: '3%', left: '66%',
-		title: 'Resume',
-		enabled: false
-	});
-	
-	resumeButton.addEventListener('click', function() {
-		resumeButton.enabled = false;
-		RedLaser.resumeScanning();
-		pauseButton.enabled = true;
-	});
-	
-	overlayView.add(resumeButton);
+    // Pause/resume/camera swap function is not available on Android 
+    swapButton = Ti.UI.createButton({
+        width: '30%', height: '10%', top: '3%', left: '34%',
+        title: 'Swap'
+    });
+    
+    swapButton.addEventListener('click', function() {
+        RedLaser.useFrontCamera = !RedLaser.useFrontCamera; 
+    });
+    
+    overlayView.add(swapButton);
+    
+    pauseButton = Ti.UI.createButton({
+        width: '30%', height: '10%', bottom: '3%', left: '34%',
+        title: 'Pause'
+    });
+    
+    pauseButton.addEventListener('click', function() {
+        pauseButton.enabled = false;
+        RedLaser.pauseScanning();
+        resumeButton.enabled = true;
+    });
+    
+    overlayView.add(pauseButton);
+    
+    resumeButton = Ti.UI.createButton({
+        width: '30%', height: '10%', bottom: '3%', left: '66%',
+        title: 'Resume',
+        enabled: false
+    });
+    
+    resumeButton.addEventListener('click', function() {
+        resumeButton.enabled = false;
+        RedLaser.resumeScanning();
+        pauseButton.enabled = true;
+    });
+    
+    overlayView.add(resumeButton);
 }
 
 torchButton = Ti.UI.createButton({
-	width: '30%', height: '10%', top: '3%', left: '66%',
-	title: 'Toggle torch'
+    width: '30%', height: '10%', top: '3%', left: '66%',
+    title: 'Toggle torch'
 });
 
 torchButton.addEventListener('click', function() {
-	RedLaser.torchState = !RedLaser.torchState;
+    RedLaser.torchState = !RedLaser.torchState;
 });
 
 overlayView.add(torchButton);
 
 snapshotButton = Ti.UI.createButton({
-	width: '30%', height: '10%', top: '3%', left: '2%',
-	title: 'Snapshot'
+    width: '30%', height: '10%', top: '3%', left: '2%',
+    title: 'Snapshot'
 });
 
 snapshotButton.addEventListener('click', function() {
-	RedLaser.requestCameraSnapshot();
+    RedLaser.requestCameraSnapshot();
 });
 
 overlayView.add(snapshotButton);
 
 snapshotImageView = Ti.UI.createImageView({
-	bottom: '15%', right: '2%', height: '40%', width: '30%',
-	borderColor: 'yellow', borderWidth: 2
+    bottom: '15%', right: '2%', height: '40%', width: '30%',
+    borderColor: 'yellow', borderWidth: 2
 });
 
 win.add(snapshotImageView);
 
 RedLaser.addEventListener('scannerActivated', function() {
-	Ti.API.info('scannerActivated event received.');
+    Ti.API.info('scannerActivated event received.');
 
-	if (RedLaser.isFlashAvailable) {
-		torchButton.enabled = true;
-		torchButton.title = 'Toggle torch';
-	} else {
-		torchButton.enabled = false;
-		torchButton.title = 'No torch';
-	}
-	
-	// All barcode types are enabled by default. Here we turn off most of them
-	// to improve performance.
-	RedLaser.scanSticky = false;
-	RedLaser.scanCodabar = false;
-	RedLaser.scanCode39 = false;
-	RedLaser.scanCode93 = false;
-	RedLaser.scanDataMatrix = false;
-	RedLaser.scanEan2 = false;
-	RedLaser.scanEan5 = false;
-	RedLaser.scanEan8 = false;
-	RedLaser.scanITF = false;
-	RedLaser.scanRSS14 = false;
-	RedLaser.scanSticky = false;
+    if (RedLaser.isFlashAvailable) {
+        torchButton.enabled = true;
+        torchButton.title = 'Toggle torch';
+    } else {
+        torchButton.enabled = false;
+        torchButton.title = 'No torch';
+    }
+    
+    // All barcode types are enabled by default. 
+    // Turning some of them off can improve performance.
+    // RedLaser.scanSticky = false;
+    // RedLaser.scanCodabar = false;
+    // RedLaser.scanCode39 = false;
+    // RedLaser.scanCode93 = false;
+    // RedLaser.scanDataMatrix = false;
+    // RedLaser.scanEan2 = false;
+    // RedLaser.scanEan5 = false;
+    // RedLaser.scanEan8 = false;
+    // RedLaser.scanITF = false;
+    // RedLaser.scanRSS14 = false;
+    // RedLaser.scanSticky = false;
 });
 
 RedLaser.addEventListener('backButtonPressed', function (e) {
-	// This is an Android only event but it doesn't do any harm to define
-	// a handler for it on either platform.
-	Ti.API.info('backButtonPressed event received.');
-	RedLaser.doneScanning();
+    // This is an Android only event but it doesn't do any harm to define
+    // a handler for it on either platform.
+    Ti.API.info('backButtonPressed event received.');
+    RedLaser.doneScanning();
 });
 
 RedLaser.addEventListener('enabledBarcodeTypesChanged', function() {
-	// This is an Android only event but it doesn't do any harm to define
-	// a handler for it on either platform.
-	Ti.API.info('enabledBarcodeTypesChanged event received.');
+    // This is an Android only event but it doesn't do any harm to define
+    // a handler for it on either platform.
+    Ti.API.info('enabledBarcodeTypesChanged event received.');
 });
 
 RedLaser.addEventListener('cameraError', function(e) {
-	// This is an Android only event but it doesn't do any harm to define
-	// a handler for it on either platform.
-	Ti.API.info('cameraError event received. Code: ' + e.errorCode);
+    // This is an Android only event but it doesn't do any harm to define
+    // a handler for it on either platform.
+    Ti.API.info('cameraError event received. Code: ' + e.errorCode);
 });
 
 Titanium.UI.setBackgroundColor('#000');
 
 startScanningButton = Ti.UI.createButton({
-	title: 'Start scanning',
-	width: '70%', height: '10%',
-	bottom: '3%'
+    title: 'Start scanning',
+    width: '70%', height: '10%',
+    bottom: '3%'
 });
 
 startScanningButton.addEventListener('click', function() {
-	RedLaser.startScanning({
-		overlay: overlayView,
-		orientation: RedLaser.PREF_ORIENTATION_PORTRAIT,
-		cameraPreview: cameraPreview,
-		cameraIndex: cameraIndexField ? parseInt(cameraIndexField.value, 10) : undefined
-	});
+    if (IOS) {
+        // iOS Only: `cameraPreview` added to the window before calling `startScanning`
+        win.add(cameraPreview);
+    }
+    RedLaser.startScanning({
+        overlay: overlayView,
+        orientation: RedLaser.PREF_ORIENTATION_PORTRAIT,
+        cameraPreview: cameraPreview,
+        cameraIndex: cameraIndexField ? parseInt(cameraIndexField.value, 10) : undefined
+    });
 });
 
 win.add(startScanningButton);
@@ -303,12 +308,12 @@ defaultInfoText += '\nRedLaser version: ' + RedLaser.sdkVersion;
 defaultInfoText += '\nInfo about last scanned barcode will be shown here.';
 
 infoTextField = Ti.UI.createTextArea({
-	color: 'black',
-	backgroundColor: 'white',
-	value: defaultInfoText,
-	height: '55%', width: '100%', top: 0,
-	editable: false,
-	font: { fontsize: 16 }
+    color: 'black',
+    backgroundColor: 'white',
+    value: defaultInfoText,
+    height: '55%', width: '100%', top: 0,
+    editable: false,
+    font: { fontsize: 16 }
 });
 
 win.add(infoTextField);
