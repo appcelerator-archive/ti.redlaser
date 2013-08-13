@@ -13,10 +13,8 @@
 @class TiRedlaserModule;
 
 @interface OverlayViewController : CameraOverlayViewController {
-    CAShapeLayer				*targetLine;
+    TiRedlaserModule *module;
 }
-
-@property (retain) TiRedlaserModule *module;
 
 -(OverlayViewController*)initWithModule:(TiRedlaserModule*)theModule;
 

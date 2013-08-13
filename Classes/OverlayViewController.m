@@ -12,13 +12,11 @@
 
 @implementation OverlayViewController
 
-@synthesize module;
-
 -(OverlayViewController*)initWithModule:(TiRedlaserModule*)theModule
 {
     self = [super init];
     if (self) {
-        self.module = theModule;
+        module = [theModule retain];
     }
     return self;
 
@@ -27,8 +25,7 @@
 -(void)dealloc
 {
 	// release any resources that have been retained by the module
-    self.module = nil;
-    
+    RELEASE_TO_NIL(module);
 	[super dealloc];
 }
 
@@ -48,7 +45,7 @@
 	// "InRange" is TRUE if there's currently a barcode detected the viewfinder. The barcode
 	//		may not have been decoded yet. It is possible for barcodes to be found without
 	// 		InRange ever being set.
-    if ([self.module _hasListeners:@"scannerStatusUpdated"]) {
+    if ([module _hasListeners:@"scannerStatusUpdated"]) {
         NSMutableDictionary *jsEvent = [NSMutableDictionary dictionary];
         
         NSMutableArray *jsFoundBarcodes = [NSMutableArray array];
@@ -93,7 +90,7 @@
             buffer.data = [NSMutableData dataWithData:UIImageJPEGRepresentation(image,1.0)];
             [jsEvent setObject:buffer forKey:@"cameraSnapshot"];
         }
-        [self.module fireEvent:@"scannerStatusUpdated" withObject:jsEvent];
+        [module fireEvent:@"scannerStatusUpdated" withObject:jsEvent];
     }
 }
 
