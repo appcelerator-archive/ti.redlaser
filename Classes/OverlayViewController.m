@@ -12,16 +12,24 @@
 
 @implementation OverlayViewController
 
-@synthesize module = _module;
+@synthesize module;
 
 -(OverlayViewController*)initWithModule:(TiRedlaserModule*)theModule
 {
     self = [super init];
     if (self) {
-        _module = [theModule retain];
+        self.module = theModule;
     }
     return self;
 
+}
+
+-(void)dealloc
+{
+	// release any resources that have been retained by the module
+    self.module = nil;
+    
+	[super dealloc];
 }
 
 -(void)barcodePickerController:(BarcodePickerController*)picker statusUpdated:(NSDictionary*)status

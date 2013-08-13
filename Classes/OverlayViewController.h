@@ -16,7 +16,7 @@
     CAShapeLayer				*targetLine;
 }
 
-@property (readonly, retain) TiRedlaserModule *module;
+@property (retain) TiRedlaserModule *module;
 
 -(OverlayViewController*)initWithModule:(TiRedlaserModule*)theModule;
 

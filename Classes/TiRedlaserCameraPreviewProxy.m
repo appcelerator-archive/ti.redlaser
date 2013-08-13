@@ -5,7 +5,6 @@
  */
 
 #import "TiRedlaserCameraPreviewProxy.h"
-#import "TiRedlaserCameraPreview.h"
 #import "TiLayoutQueue.h"
 
 @implementation TiRedlaserCameraPreviewProxy
@@ -47,6 +46,7 @@
     TiThreadPerformOnMainThread(^{
         if (overlay != nil) {
             [overlay.view removeFromSuperview];
+            [self forgetProxy:overlay];
             RELEASE_TO_NIL(overlay);
         }
         
@@ -54,9 +54,6 @@
         
         RELEASE_TO_NIL(picker);
         RELEASE_TO_NIL(overlayViewController);
-        
-        [self forgetProxy:overlay];
-        RELEASE_TO_NIL(overlay);
     }, NO);
 }
 
