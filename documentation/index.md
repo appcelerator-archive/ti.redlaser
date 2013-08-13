@@ -31,7 +31,7 @@ for further details about ARMv6 support.
 
 ## Getting Started
 
-View the Using Titanium Modules document for instructions on getting
+View the [Using Titanium Modules](http://docs.appcelerator.com/titanium/latest/#!/guide/Using_Titanium_Modules) document for instructions on getting
 started with using this module in your application.
 
 ## Accessing the RedLaser Module
@@ -333,6 +333,10 @@ __Return type__: void
 
 #### createCameraPreview(<parameter object>)
 
+Creates a [Ti.UI.View][] where the camera preview can be displayed. This view must be 
+passed into _startScanning_ to start scanning and display the preview in that view.
+See _startScanning_ for more details.
+
 If the cameraPreview view is added to a [Ti.UI.TabGroup][] it is necessary to call 
 `startScanning` and `doneScanning` when the tab is focused and blured respectively.
 See the example app `tabgroup-app.js`.
@@ -482,8 +486,6 @@ Zsombor Papp, Logical Labs
 
 zsombor.papp@logicallabs.com<br>
 titanium@logicallabs.com
-
-After author add this:
 
 ## Module History
 
