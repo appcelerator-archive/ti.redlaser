@@ -1,4 +1,4 @@
-# RedLaser Module
+# Ti.RedLaser Module
 
 ## Description
 
@@ -316,15 +316,8 @@ __Parameters__
 
 * _overlay_: A TiView object that provides a user interface while the camera
 preview is active.
-* _cameraPreview_: A CameraPreview object created by the createCameraPreview
+* _cameraPreview_: A [Ti.RedLaser.CameraPreview][] object created by the createCameraPreview
 function. 
-
-	__Android only:__ Add this view to the overlay view. The RedLaser SDK will place the
-	camera preview into this view.
-	
-	__iOS only:__ Add this view to a parent view or window before calling _startScanning_.
-	If cameraPreview is not passed to _startScanning_, a scanner window will be opened. 
-
 * _cameraIndex_: The index of the desired camera. __Android only.__ See
 _useFrontCamera_ on iOS.
 * _orientation_: Equivalent to _getOrientationSetting_. __Android only.__
@@ -333,19 +326,15 @@ __Return type__: void
 
 #### createCameraPreview(<parameter object>)
 
-Creates a [Ti.UI.View][] where the camera preview can be displayed. This view must be 
+Creates a [Ti.RedLaser.CameraPreview][] where the camera preview can be displayed. This view must be 
 passed into _startScanning_ to start scanning and display the preview in that view.
 See _startScanning_ for more details.
 
-If the cameraPreview view is added to a [Ti.UI.TabGroup][] it is necessary to call 
-`startScanning` and `doneScanning` when the tab is focused and blured respectively.
-See the example app `tabgroup-app.js`.
-
 __Parameters__
 
-[Ti.UI.View][] parameters
+[Ti.RedLaser.CameraPreview][] parameters
 
-__Return type__: [Ti.UI.View][] that can be passed into _startScanning_ as _cameraPreview_
+__Return type__: [Ti.RedLaser.CameraPreview][] that can be passed into _startScanning_ as _cameraPreview_
 
 #### pauseScanning()
 
@@ -497,5 +486,4 @@ Please direct all questions, feedback, and concerns to [info@appcelerator.com](m
 ## License
 Copyright(c) 2010-2013 by Appcelerator, Inc. All Rights Reserved. Please see the LICENSE file included in the distribution for further details.
 
-[Ti.UI.View]: http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.View
-[Ti.UI.TabGroup]: http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.TabGroup
+[Ti.RedLaser.CameraPreview]: camerapreview.html

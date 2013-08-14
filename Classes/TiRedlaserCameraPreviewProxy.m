@@ -16,9 +16,20 @@
     return [super init];
 }
 
+-(void)_configure
+{
+	[self replaceValue:nil forKey:@"orientationModes" notification:NO];
+	[super _configure];
+}
+
 -(void)startScanningWithPicker:(BarcodePickerController *)picker_ overlayViewProxy:(TiViewProxy *)overlay_ overlayViewController:(OverlayViewController *)overlayViewController_
 {
     TiThreadPerformOnMainThread(^{
+        if (![UIDevice currentDevice].generatesDeviceOrientationNotifications) {
+            [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+        }
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:) name:UIDeviceOrientationDidChangeNotification object:nil];
+        
         picker = [picker_ retain];
         overlayViewController = [overlayViewController_ retain];
         
@@ -44,6 +55,8 @@
 -(void)doneScanning
 {
     TiThreadPerformOnMainThread(^{
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+        
         if (overlay != nil) {
             [overlay.view removeFromSuperview];
             [self forgetProxy:overlay];
@@ -57,17 +70,68 @@
     }, NO);
 }
 
+#pragma mark - properties
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+-(void)setOrientationModes:(id)value
 {
-    [picker willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    // This Proxy must be added to the layoutqueue here
-    // If it is not added, none of its children will be laid out after the first rotation
-    [TiLayoutQueue addViewProxy:self];
+	[self replaceValue:value forKey:@"orientationModes" notification:YES];
+	orientationFlags = RLOrientationFlagsFromObject(value);
+}
+
+#pragma mark - UIDeviceOrientationDidChangeNotification selector
+
+-(void)didRotate:(id)unused
+{
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    BOOL shouldRotate = RL_ORIENTATION_ALLOWED(orientationFlags, orientation) || (orientationFlags == RLOrientationNone);
     
+    if (shouldRotate) {
+        NSTimeInterval delay = [[UIApplication sharedApplication] statusBarOrientationAnimationDuration];
+        [picker willAnimateRotationToInterfaceOrientation:[[UIDevice currentDevice] orientation] duration: delay];
+    }
+    
+    [TiLayoutQueue addViewProxy:self];
     if (overlay != nil) {
         [TiLayoutQueue addViewProxy:overlay];
     }
+}
+
+#pragma mark - Utils
+
+RLOrientationFlags RLOrientationFlagsFromObject(id args)
+{
+	if (![args isKindOfClass:[NSArray class]])
+	{
+		return RLOrientationNone;
+	}
+    
+	RLOrientationFlags result = RLOrientationNone;
+	for (id mode in args)
+	{
+		UIInterfaceOrientation orientation = (UIInterfaceOrientation)[TiUtils orientationValue:mode def:-1];
+		switch ((int)orientation)
+		{
+			case UIDeviceOrientationPortrait:
+			case UIDeviceOrientationPortraitUpsideDown:
+			case UIDeviceOrientationLandscapeLeft:
+			case UIDeviceOrientationLandscapeRight:
+				RL_ORIENTATION_SET(result,orientation);
+				break;
+			case UIDeviceOrientationUnknown:
+				DebugLog(@"[WARN] Ti.Gesture.UNKNOWN / Ti.UI.UNKNOWN is an invalid orientation mode.");
+				break;
+			case UIDeviceOrientationFaceDown:
+				DebugLog(@"[WARN] Ti.Gesture.FACE_DOWN / Ti.UI.FACE_DOWN is an invalid orientation mode.");
+				break;
+			case UIDeviceOrientationFaceUp:
+				DebugLog(@"[WARN] Ti.Gesture.FACE_UP / Ti.UI.FACE_UP is an invalid orientation mode.");
+				break;
+			default:
+				DebugLog(@"[WARN] An invalid orientation was requested. Ignoring.");
+				break;
+		}
+	}
+	return result;
 }
 
 @end

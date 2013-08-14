@@ -120,7 +120,8 @@ RedLaser.addEventListener('scannerReturnedResults', function(e) {
 });
 
 win = Ti.UI.createWindow({
-    backgroundColor: 'black'
+    backgroundColor: 'black',
+    orientationModes: [Ti.UI.PORTRAIT]
 });
 
 overlayView = Ti.UI.createView({
@@ -128,8 +129,12 @@ overlayView = Ti.UI.createView({
 });
 
 cameraPreview = RedLaser.createCameraPreview({
-    width: '100%', height: '100%'
     // The size and postion of the camera preview view can be set here
+    width: '100%', 
+    height: '100%',
+    // orientationModes: iOS only
+    // Should be set to the same orientations as the window it is added to
+    orientationModes: [Ti.UI.PORTRAIT]
 });
 
 if (ANDROID) {
