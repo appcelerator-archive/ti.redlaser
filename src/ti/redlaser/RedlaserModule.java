@@ -116,7 +116,12 @@ public class RedlaserModule extends KrollModule
 	@Kroll.method
 	public void doneScanning()
 	{
-		ScannerActivity.activeInstance.doneScanning();
+		// MOD-1478 - NullPointerException if doneScanning is called when scanner not active
+		if (ScannerActivity.activeInstance != null) {
+			ScannerActivity.activeInstance.doneScanning();
+		} else {
+			Log.w(LCAT, "Scanner is not active!");
+		}
 	}
 	
 	@SuppressWarnings("rawtypes")

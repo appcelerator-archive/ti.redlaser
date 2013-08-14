@@ -1,5 +1,7 @@
 # Change Log
 <pre>
+v1.0.2  Fixed NullPointerException if doneScanning called with no scanner active [MOD-1478]
+
 v1.0.1  Fixed QR codes not scanning [MOD-1433]
 	
 v1.0.0  Initial Release
