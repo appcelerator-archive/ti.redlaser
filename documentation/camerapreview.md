@@ -19,6 +19,7 @@ __iOS only__
 
 Array of supported orientation modes, specified using the orientation constants defined in [Ti.UI][].
 
+If orientationModes is not set or is set to an empty array, the CameraPreview will rotate in every orientation.
 To restrict this CameraPreview to a certain set of orientations, specify one or more of the orientation constants [Ti.UI.LANDSCAPE_LEFT][], [Ti.UI.LANDSCAPE_RIGHT][], [Ti.UI.PORTRAIT][], [Ti.UI.UPSIDE_PORTRAIT][].
 
 In most cases it is desirable to set the _orientationModes_ of the CameraPreview to the same orientations as its containing window.

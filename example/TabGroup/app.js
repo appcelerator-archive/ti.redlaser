@@ -16,12 +16,15 @@ var win1 = Titanium.UI.createWindow({
 });
 var win2 = Titanium.UI.createWindow({
     backgroundColor: 'blue',
-    title: 'Blue Window'
+    title: 'Blue Window',
+    orientationModes: [Ti.UI.PORTRAIT]
 });
 
 var cameraPreview = RedLaser.createCameraPreview({
-    width: '100%', height: '100%'
     // The size and postion of the camera preview view can be set here
+    width: '100%', 
+    height: '100%',
+    orientationModes: [Ti.UI.PORTRAIT]
 });
 win2.add(cameraPreview);
 
