@@ -1,4 +1,4 @@
-# RedLaser Module
+# Ti.RedLaser Module
 
 ## Description
 
@@ -31,7 +31,7 @@ for further details about ARMv6 support.
 
 ## Getting Started
 
-View the Using Titanium Modules document for instructions on getting
+View the [Using Titanium Modules](http://docs.appcelerator.com/titanium/latest/#!/guide/Using_Titanium_Modules) document for instructions on getting
 started with using this module in your application.
 
 ## Accessing the RedLaser Module
@@ -55,9 +55,11 @@ The following is a simple example of how to use the RedLaser module:
 	});
 
 	overlayView = Ti.UI.createView({...});
+	cameraPreview = RedLaser.createCameraPreview({...});
 	
 	RedLaser.startScanning({
 		overlay: overlayView,
+		cameraPreview: cameraPreview
 	});
 
 
@@ -310,18 +312,29 @@ __Type__: Integer
 
 Brings up the camera preview and starts the scanner.
 
-__Parameters___
+__Parameters__
 
 * _overlay_: A TiView object that provides a user interface while the camera
 preview is active.
-* _cameraPreview_: A CameraPreview object created by the createCameraPreview
-function. Add this view to the overlay view. The RedLaser SDK will place the
-camera preview into this view. __Android only.__
+* _cameraPreview_: A [Ti.RedLaser.CameraPreview][] object created by the createCameraPreview
+function. 
 * _cameraIndex_: The index of the desired camera. __Android only.__ See
 _useFrontCamera_ on iOS.
 * _orientation_: Equivalent to _getOrientationSetting_. __Android only.__
 
 __Return type__: void
+
+#### createCameraPreview(<parameter object>)
+
+Creates a [Ti.RedLaser.CameraPreview][] where the camera preview can be displayed. This view must be 
+passed into _startScanning_ to start scanning and display the preview in that view.
+See _startScanning_ for more details.
+
+__Parameters__
+
+[Ti.RedLaser.CameraPreview][] parameters
+
+__Return type__: [Ti.RedLaser.CameraPreview][] that can be passed into _startScanning_ as _cameraPreview_
 
 #### pauseScanning()
 
@@ -463,8 +476,6 @@ Zsombor Papp, Logical Labs
 zsombor.papp@logicallabs.com<br>
 titanium@logicallabs.com
 
-After author add this:
-
 ## Module History
 
 View the [change log](changelog.html) for this module.
@@ -474,3 +485,5 @@ Please direct all questions, feedback, and concerns to [info@appcelerator.com](m
 
 ## License
 Copyright(c) 2010-2013 by Appcelerator, Inc. All Rights Reserved. Please see the LICENSE file included in the distribution for further details.
+
+[Ti.RedLaser.CameraPreview]: camerapreview.html
