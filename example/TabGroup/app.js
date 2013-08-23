@@ -40,13 +40,13 @@ tabGroup.addTab(tab1);
 tabGroup.addTab(tab2);
 
 // When using a RedLaser in a TabGroup, we must call `startScanning` and
-// `doneScanning` when the scanner's tab is focused and blured respectively.
-tab2.addEventListener('focus', function() {
+// `doneScanning` when the scanner's window is focused and blurred respectively.
+win2.addEventListener('focus', function() {
     RedLaser.startScanning({
         cameraPreview: cameraPreview
     });
 });
-tab2.addEventListener('blur', function() {
+win2.addEventListener('blur', function() {
     RedLaser.doneScanning();
 });
 
