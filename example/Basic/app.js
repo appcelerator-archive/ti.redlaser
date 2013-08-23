@@ -1,7 +1,7 @@
 /*jslint sloppy:true */
 
 var
-    IOS = Ti.Platform.osname === 'iphone',
+    IOS = (Ti.Platform.osname === 'iphone' || Ti.Platform.osname === 'ipad'),
     ANDROID = Ti.Platform.osname === 'android',
     defaultInfoText,
     RedLaser, win, startScanningButton,
