@@ -23,8 +23,11 @@ Ti.API.info('BARCODE_TYPE_EAN13:' + RedLaser.BARCODE_TYPE_EAN13);
 Ti.API.info('BARCODE_TYPE_EAN2:' + RedLaser.BARCODE_TYPE_EAN2);
 Ti.API.info('BARCODE_TYPE_EAN5:' + RedLaser.BARCODE_TYPE_EAN5);
 Ti.API.info('BARCODE_TYPE_EAN8:' + RedLaser.BARCODE_TYPE_EAN8);
+Ti.API.info('BARCODE_TYPE_GS1DATABAR:' + RedLaser.BARCODE_TYPE_GS1DATABAR);
+Ti.API.info('BARCODE_TYPE_GS1DATABAR_EXPANDED:' + RedLaser.BARCODE_TYPE_GS1DATABAR_EXPANDED);
 Ti.API.info('BARCODE_TYPE_ITF:' + RedLaser.BARCODE_TYPE_ITF);
 Ti.API.info('BARCODE_TYPE_NONE:' + RedLaser.BARCODE_TYPE_NONE);
+Ti.API.info('BARCODE_TYPE_PDF417:' + RedLaser.BARCODE_TYPE_PDF417);
 Ti.API.info('BARCODE_TYPE_QRCODE:' + RedLaser.BARCODE_TYPE_QRCODE);
 Ti.API.info('BARCODE_TYPE_RSS14:' + RedLaser.BARCODE_TYPE_RSS14);
 Ti.API.info('BARCODE_TYPE_STICKY:' + RedLaser.BARCODE_TYPE_STICKY);
@@ -252,7 +255,6 @@ RedLaser.addEventListener('scannerActivated', function() {
     
     // All barcode types are enabled by default. 
     // Turning some of them off can improve performance.
-    // RedLaser.scanSticky = false;
     // RedLaser.scanCodabar = false;
     // RedLaser.scanCode39 = false;
     // RedLaser.scanCode93 = false;
@@ -262,7 +264,6 @@ RedLaser.addEventListener('scannerActivated', function() {
     // RedLaser.scanEan8 = false;
     // RedLaser.scanITF = false;
     // RedLaser.scanRSS14 = false;
-    // RedLaser.scanSticky = false;
 });
 
 RedLaser.addEventListener('backButtonPressed', function (e) {

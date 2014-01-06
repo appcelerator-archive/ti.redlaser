@@ -74,10 +74,12 @@ public class ScannerActivity extends BarcodeScanActivity {
     	enabledTypes.setEan2(true);
     	enabledTypes.setEan5(true);
     	enabledTypes.setEan8(true);
+    	enabledTypes.setGS1Databar(true);
+    	enabledTypes.setGS1DatabarExpanded(true);
     	enabledTypes.setITF(true);
+    	enabledTypes.setPDF417(true);
     	enabledTypes.setQRCode(true);
     	enabledTypes.setRSS14(true);
-    	enabledTypes.setSticky(true);
     	enabledTypes.setUpce(true);
     	
         requestCameraIndex(requestedCameraIndex);

@@ -51,11 +51,13 @@ public class RedlaserModule extends KrollModule
 	@Kroll.constant public static final int BARCODE_TYPE_EAN2 = BarcodeTypes.EAN2;
 	@Kroll.constant public static final int BARCODE_TYPE_EAN5 = BarcodeTypes.EAN5;
 	@Kroll.constant public static final int BARCODE_TYPE_EAN8 = BarcodeTypes.EAN8;
+	@Kroll.constant public static final int BARCODE_TYPE_GS1DATABAR = BarcodeTypes.GS1DATABAR;
+	@Kroll.constant public static final int BARCODE_TYPE_GS1DATABAR_EXPANDED = BarcodeTypes.GS1DATABAR_EXPANDED;
 	@Kroll.constant public static final int BARCODE_TYPE_ITF = BarcodeTypes.ITF;
 	@Kroll.constant public static final int BARCODE_TYPE_NONE = BarcodeTypes.NONE;
+	@Kroll.constant public static final int BARCODE_TYPE_PDF417 = BarcodeTypes.PDF417;
 	@Kroll.constant public static final int BARCODE_TYPE_QRCODE = BarcodeTypes.QRCODE;
 	@Kroll.constant public static final int BARCODE_TYPE_RSS14 = BarcodeTypes.RSS14;
-	@Kroll.constant public static final int BARCODE_TYPE_STICKY = BarcodeTypes.STICKYBITS;
 	@Kroll.constant public static final int BARCODE_TYPE_UPCE = BarcodeTypes.UPCE;
 	
 	@Kroll.constant public static final String PREF_ORIENTATION_LANDSCAPE = ScannerActivity.PREF_ORIENTATION_LANDSCAPE;
@@ -357,6 +359,36 @@ public class RedlaserModule extends KrollModule
 		return ScannerActivity.activeInstance != null &&
 				ScannerActivity.activeInstance.enabledTypes.getEan8();
 	}
+	
+	@Kroll.setProperty
+	public void setScanGS1Databar(Boolean value)
+	{
+		if (ScannerActivity.activeInstance != null) {
+			ScannerActivity.activeInstance.enabledTypes.setGS1Databar(value);
+		}
+	}
+	
+	@Kroll.getProperty
+	public Boolean getScanGS1Databar()
+	{
+		return ScannerActivity.activeInstance != null &&
+				ScannerActivity.activeInstance.enabledTypes.getGS1Databar();
+	}
+	
+	@Kroll.setProperty
+	public void setScanGS1DatabarExpanded(Boolean value)
+	{
+		if (ScannerActivity.activeInstance != null) {
+			ScannerActivity.activeInstance.enabledTypes.setGS1DatabarExpanded(value);
+		}
+	}
+	
+	@Kroll.getProperty
+	public Boolean getScanGS1DatabarExpanded()
+	{
+		return ScannerActivity.activeInstance != null &&
+				ScannerActivity.activeInstance.enabledTypes.getGS1DatabarExpanded();
+	}
 
 	@Kroll.setProperty
 	public void setScanITF(Boolean value)
@@ -371,6 +403,21 @@ public class RedlaserModule extends KrollModule
 	{
 		return ScannerActivity.activeInstance != null &&
 				ScannerActivity.activeInstance.enabledTypes.getITF();
+	}
+
+	@Kroll.setProperty
+	public void setScanPDF417(Boolean value)
+	{
+		if (ScannerActivity.activeInstance != null) {
+			ScannerActivity.activeInstance.enabledTypes.setPDF417(value);
+		}
+	}
+	
+	@Kroll.getProperty
+	public Boolean getScanPDF417()
+	{
+		return ScannerActivity.activeInstance != null &&
+				ScannerActivity.activeInstance.enabledTypes.getPDF417();
 	}
 
 	@Kroll.setProperty
@@ -401,21 +448,6 @@ public class RedlaserModule extends KrollModule
 	{
 		return ScannerActivity.activeInstance != null &&
 				ScannerActivity.activeInstance.enabledTypes.getRSS14();
-	}
-
-	@Kroll.setProperty
-	public void setScanSticky(Boolean value)
-	{
-		if (ScannerActivity.activeInstance != null) {
-			ScannerActivity.activeInstance.enabledTypes.setSticky(value);
-		}
-	}
-	
-	@Kroll.getProperty
-	public Boolean getScanSticky()
-	{
-		return ScannerActivity.activeInstance != null &&
-				ScannerActivity.activeInstance.enabledTypes.getSticky();
 	}
 
 	@Kroll.setProperty
