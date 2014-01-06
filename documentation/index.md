@@ -266,10 +266,31 @@ of every supported barcode type is on.
 
 __Type__: Boolean
 
+#### scanGS1Databar
+
+Turns detection of this type of barcode on/off. By default, detection
+of every supported barcode type is on. __Android only.__
+
+__Type__: Boolean
+
+#### scanGS1DatabarExpanded
+
+Turns detection of this type of barcode on/off. By default, detection
+of every supported barcode type is on. __Android only.__
+
+__Type__: Boolean
+
 #### scanITF
 
 Turns detection of this type of barcode on/off. By default, detection
 of every supported barcode type is on.
+
+__Type__: Boolean
+
+#### scanPDF417
+
+Turns detection of this type of barcode on/off. By default, detection
+of every supported barcode type is on. __Android only.__
 
 __Type__: Boolean
 
@@ -290,7 +311,7 @@ __Type__: Boolean
 #### scanSticky
 
 Turns detection of this type of barcode on/off. By default, detection
-of every supported barcode type is on.
+of every supported barcode type is on. __iOS only.__
 
 __Type__: Boolean
 
@@ -445,8 +466,11 @@ The following constants represent barcode types:
 * BARCODE\_TYPE\_EAN2
 * BARCODE\_TYPE\_EAN5
 * BARCODE\_TYPE\_EAN8
+* BARCODE\_TYPE\_GS1DATABAR
+* BARCODE\_TYPE\_GS1DATABAR\_EXPANDED
 * BARCODE\_TYPE\_ITF
 * BARCODE\_TYPE\_NONE
+* BARCODE\_TYPE\_PDF417
 * BARCODE\_TYPE\_QRCODE
 * BARCODE\_TYPE\_RSS14
 * BARCODE\_TYPE\_STICKY
