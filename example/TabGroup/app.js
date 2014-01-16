@@ -1,5 +1,7 @@
-// iOS only
+// WARNING: This example is for iOS only.
 var RedLaser = require('ti.redlaser');
+var osname = Ti.Platform.osname,
+    IOS = (osname === 'iphone' || osname === 'ipad');
 
 RedLaser.addEventListener('scannerStatusUpdated', logStatusUpdate);
 RedLaser.addEventListener('scannerReturnedResults', function(e) {
@@ -39,9 +41,17 @@ var tab2 = Ti.UI.createTab({
 tabGroup.addTab(tab1);
 tabGroup.addTab(tab2);
 
+win1.addEventListener('focus', function() {
+    isIOSWithWarning();
+});
 // When using a RedLaser in a TabGroup, we must call `startScanning` and
 // `doneScanning` when the scanner's window is focused and blurred respectively.
 win2.addEventListener('focus', function() {
+    // Do not start scanning if not running on iOS.
+    if (!isIOSWithWarning()) {
+        return;
+    }
+
     RedLaser.startScanning({
         cameraPreview: cameraPreview
     });
@@ -51,6 +61,13 @@ win2.addEventListener('blur', function() {
 });
 
 tabGroup.open();
+
+function isIOSWithWarning(){
+    if (!IOS) {
+        alert("This example is for iOS only.");
+    }
+    return IOS;
+}
 
 function logBarcodeResult(barcode) {
     var locationString, barcodeInfo;
