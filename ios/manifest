@@ -15,4 +15,4 @@ name: redlaser
 moduleid: ti.redlaser
 guid: 5732454f-aff6-4836-b38d-b50fd1774395
 platform: iphone
-minsdk: 2.1.3.GA
+minsdk: 3.2.3.GA
