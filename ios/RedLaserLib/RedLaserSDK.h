@@ -1,8 +1,7 @@
-#import <UIKit/UIKit.h>
 /*******************************************************************************
 	RedLaserSDK.h
 	
-	(c) 2009-2011 eBay Inc.
+	(c) 2009-2013 eBay Inc.
 	
 	This is the public API for the RedLaser SDK.
 */
@@ -11,18 +10,22 @@ extern "C" {
 #endif
 
 // Barcode Symbologies
-#define kBarcodeTypeEAN13 			0x1
-#define kBarcodeTypeUPCE 			0x2
-#define kBarcodeTypeEAN8 			0x4
-#define kBarcodeTypeSTICKY 			0x8
-#define kBarcodeTypeQRCODE 			0x10
-#define kBarcodeTypeCODE128 		0x20
-#define kBarcodeTypeCODE39 			0x40
-#define kBarcodeTypeDATAMATRIX 		0x80
-#define kBarcodeTypeITF 			0x100
-#define kBarcodeTypeEAN5 			0x200
-#define kBarcodeTypeEAN2			0x400
-#define kBarcodeTypeCodabar			0x800
+#define kBarcodeTypeEAN13 				0x1
+#define kBarcodeTypeUPCE 				0x2
+#define kBarcodeTypeEAN8 				0x4
+#define kBarcodeTypeQRCODE 				0x10
+#define kBarcodeTypeCODE128 			0x20
+#define kBarcodeTypeCODE39 				0x40
+#define kBarcodeTypeDATAMATRIX 			0x80
+#define kBarcodeTypeITF 				0x100
+#define kBarcodeTypeEAN5 				0x200
+#define kBarcodeTypeEAN2				0x400
+#define kBarcodeTypeCodabar				0x800
+#define kBarcodeTypeCODE93				0x1000
+#define kBarcodeTypePDF417				0x2000
+#define kBarcodeTypeGS1Databar			0x4000
+#define kBarcodeTypeGS1DatabarExpanded	0x8000
+#define kBarcodeTypeAztec				0x10000
 
 typedef enum
 {
@@ -33,9 +36,12 @@ typedef enum
 	RLState_NoCamera = -2,
 	RLState_BadLicense = -3,
 	RLState_ScanLimitReached = -4,
+	RLState_NoKeychainAccess = -5,
 } RedLaserStatus;
 
 #if TARGET_OS_MAC
+#import <Foundation/Foundation.h>
+@class BarcodePickerController2;
 
 /*******************************************************************************
 	RL_GetRedLaserSDKVersion()
@@ -63,15 +69,10 @@ NSString *RL_GetRedLaserSDKVersion();
 */
 RedLaserStatus RL_CheckReadyStatus();
 
-
-#import <Foundation/Foundation.h>
-
-@class BarcodePickerController;
-
 /*******************************************************************************
 	BarcodeResult
 	
-	The return type of the recognizer is a NSSet of Barcode objects.	
+	The return type of the recognizer is a NSSet of BarcodeResult objects.	
 */
 @interface BarcodeResult : NSObject <NSCoding> { }
 
@@ -85,19 +86,8 @@ RedLaserStatus RL_CheckReadyStatus();
 @property (readonly, retain) NSMutableArray	*barcodeLocation;
 @end
 
-/*******************************************************************************
-	BarcodePickerControllerDelegate
-	
-	The delegate receives messages about the results of a scan. This method
-	gets called when a scan session completes.	
-*/
-@protocol BarcodePickerControllerDelegate <NSObject>
-@optional
-- (void) barcodePickerController:(BarcodePickerController*)picker 
-		returnResults:(NSSet *)results;
-@end
-
 #if TARGET_OS_IPHONE
+#import <UIKit/UIKit.h>
 
 /*******************************************************************************
 	FindBarcodesInUIImage
@@ -109,6 +99,49 @@ RedLaserStatus RL_CheckReadyStatus();
 */
 NSSet *FindBarcodesInUIImage(UIImage *inputImage);
 
+/*******************************************************************************
+	BarcodePickerControllerDelegate
+	
+	The delegate receives messages about the results of a scan. This method
+	gets called when a scan session completes.	
+*/
+@protocol BarcodePickerControllerDelegate <NSObject>
+@optional
+- (void) barcodePickerController:(BarcodePickerController2 *)picker
+		returnResults:(NSSet *)results;
+@end
+
+/*******************************************************************************
+	BarcodePickerController2
+	
+*/
+@interface BarcodePickerController2 : UIViewController
+
+@property (nonatomic, assign) id <BarcodePickerControllerDelegate> delegate;
+@property (nonatomic, assign) BOOL useFrontCamera;
+
+// Torch
+- (BOOL) hasTorch;
+- (BOOL) isTorchOn;
+- (void) turnTorch:(BOOL)value;
+
+// Focus/Exposure
+- (bool) canFocus;
+@property (readonly, assign)  BOOL isFocusing;
+@property (nonatomic, assign) BOOL exposureLock;
+
+- (void) prepareToScan;
+- (void) pauseScanning;
+- (void) resumeScanning;
+- (void) clearResultsSet;
+- (void) doneScanning;
+- (void) startCollectingLocationData;
+- (void) requestCameraSnapshot:(bool) stillPictureSized;
+- (void) statusUpdated:(NSDictionary*) status;
+- (void) reportUnwantedBarcode:(BarcodeResult *) barcode;
+@end
+
+@class BarcodePickerController;
 
 /*******************************************************************************
 	CameraOverlayViewController
@@ -125,31 +158,19 @@ NSSet *FindBarcodesInUIImage(UIImage *inputImage);
 		statusUpdated:(NSDictionary*)status;
 @end
 
-
 /*******************************************************************************
 	BarcodePickerController
 	
 	This ViewController subclass runs the RedLaser scanner, detects barcodes, and
 	notifies its delegate of what it found.
 */
-@interface BarcodePickerController : UIViewController { }
-
-- (void) pauseScanning;
-- (void) resumeScanning;
-- (void) prepareToScan;
-- (void) clearResultsSet;
-- (void) doneScanning;
-- (BOOL) hasFlash;
-- (void) turnFlash:(BOOL)value;
-- (void) requestCameraSnapshot:(bool) stillPictureSized;
+@interface BarcodePickerController : BarcodePickerController2
 
 @property (nonatomic, retain) CameraOverlayViewController *overlay;
-@property (nonatomic, assign) id <BarcodePickerControllerDelegate> delegate;
 
 @property (nonatomic, assign) BOOL scanUPCE;
 @property (nonatomic, assign) BOOL scanEAN8;
 @property (nonatomic, assign) BOOL scanEAN13;
-@property (nonatomic, assign) BOOL scanSTICKY;
 @property (nonatomic, assign) BOOL scanQRCODE;
 @property (nonatomic, assign) BOOL scanCODE128;
 @property (nonatomic, assign) BOOL scanCODE39;
@@ -158,12 +179,14 @@ NSSet *FindBarcodesInUIImage(UIImage *inputImage);
 @property (nonatomic, assign) BOOL scanEAN5;
 @property (nonatomic, assign) BOOL scanEAN2;
 @property (nonatomic, assign) BOOL scanCODABAR;
+@property (nonatomic, assign) BOOL scanCODE93;
+@property (nonatomic, assign) BOOL scanPDF417;
+@property (nonatomic, assign) BOOL scanGS1DATABAR;
+@property (nonatomic, assign) BOOL scanGS1DATABAREXPANDED;
+
 @property (nonatomic, assign) CGRect activeRegion;
 @property (nonatomic, assign) UIImageOrientation orientation;
 @property (nonatomic, assign) BOOL torchState;
-@property (readonly, assign)  BOOL isFocusing;
-@property (nonatomic, assign) BOOL useFrontCamera;
-@property (nonatomic, assign) BOOL exposureLock;
 
 @end
 

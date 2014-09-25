@@ -93,9 +93,4 @@
         [module fireEvent:@"scannerStatusUpdated" withObject:jsEvent];
     }
 }
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationPortrait;
-}
 @end
