@@ -26,23 +26,29 @@ Ti.API.info('BARCODE_TYPE_EAN8:' + RedLaser.BARCODE_TYPE_EAN8);
 Ti.API.info('BARCODE_TYPE_GS1DATABAR:' + RedLaser.BARCODE_TYPE_GS1DATABAR);
 Ti.API.info('BARCODE_TYPE_GS1DATABAR_EXPANDED:' + RedLaser.BARCODE_TYPE_GS1DATABAR_EXPANDED);
 Ti.API.info('BARCODE_TYPE_ITF:' + RedLaser.BARCODE_TYPE_ITF);
-Ti.API.info('BARCODE_TYPE_NONE:' + RedLaser.BARCODE_TYPE_NONE);
 Ti.API.info('BARCODE_TYPE_PDF417:' + RedLaser.BARCODE_TYPE_PDF417);
 Ti.API.info('BARCODE_TYPE_QRCODE:' + RedLaser.BARCODE_TYPE_QRCODE);
-Ti.API.info('BARCODE_TYPE_RSS14:' + RedLaser.BARCODE_TYPE_RSS14);
-Ti.API.info('BARCODE_TYPE_STICKY:' + RedLaser.BARCODE_TYPE_STICKY);
 Ti.API.info('BARCODE_TYPE_UPCE:' + RedLaser.BARCODE_TYPE_UPCE);
-Ti.API.info('STATUS_API_LEVEL_TOO_LOW:' + RedLaser.STATUS_API_LEVEL_TOO_LOW);
 Ti.API.info('STATUS_EVAL_MODE_READY:' + RedLaser.STATUS_EVAL_MODE_READY);
 Ti.API.info('STATUS_LICENSED_MODE_READY:' + RedLaser.STATUS_LICENSED_MODE_READY);
-Ti.API.info('STATUS_MISSING_OS_LIBS:' + RedLaser.STATUS_MISSING_OS_LIBS);
 Ti.API.info('STATUS_NO_CAMERA:' + RedLaser.STATUS_NO_CAMERA);
 Ti.API.info('STATUS_BAD_LICENSE:' + RedLaser.STATUS_BAD_LICENSE);
 Ti.API.info('STATUS_SCAN_LIMIT_REACHED:' + RedLaser.STATUS_SCAN_LIMIT_REACHED);
-Ti.API.info('STATUS_MISSING_PERMISSIONS:' + RedLaser.STATUS_MISSING_PERMISSIONS);
-Ti.API.info('STATUS_UNKNOWN_STATE:' + RedLaser.STATUS_UNKNOWN_STATE);
 
-var firstDiscoveredBarcode;
+if (IOS) {
+    Ti.API.info('STATUS_MISSING_OS_LIBS:' + RedLaser.STATUS_MISSING_OS_LIBS);
+}
+
+if (ANDROID) {
+    Ti.API.info('BARCODE_TYPE_NONE:' + RedLaser.BARCODE_TYPE_NONE);
+    Ti.API.info('BARCODE_TYPE_RSS14:' + RedLaser.BARCODE_TYPE_RSS14);
+    Ti.API.info('STATUS_MISSING_PERMISSIONS:' + RedLaser.STATUS_MISSING_PERMISSIONS);
+    Ti.API.info('STATUS_API_LEVEL_TOO_LOW:' + RedLaser.STATUS_API_LEVEL_TOO_LOW);
+    Ti.API.info('STATUS_MISSING_PERMISSIONS:' + RedLaser.STATUS_MISSING_PERMISSIONS);
+    Ti.API.info('STATUS_UNKNOWN_STATE:' + RedLaser.STATUS_UNKNOWN_STATE);
+}
+
+var firstDiscoveredBarcode, isAssociated=false;
 
 function logBarcodeResult(barcode) {
     var locationString, barcodeInfo;
@@ -70,11 +76,13 @@ function logBarcodeResult(barcode) {
     } else {
         firstDiscoveredBarcode = barcode;
     }
-    
-    if (barcode.associatedBarcode) {
+
+    if (barcode.associatedBarcode && !isAssociated) {
         Ti.API.info('Associated barcode info:');
+        isAssociated = true;
         logBarcodeResult(barcode.associatedBarcode);
     } else {
+        isAssociated = false;
         Ti.API.info('No associated barcode.');
     }   
 }
