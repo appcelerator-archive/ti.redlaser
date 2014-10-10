@@ -670,14 +670,20 @@ MAKE_SYSTEM_PROP(STATUS_SCAN_LIMIT_REACHED,RLState_ScanLimitReached);
 -(void)setUseFrontCamera:(id)value
 {
     if (picker != nil) {
-        picker.useFrontCamera = [TiUtils boolValue:value];
+        TiThreadPerformOnMainThread(^{
+            picker.useFrontCamera = [TiUtils boolValue:value];
+        }, YES);
     }
 }
 
 -(NSNumber*)useFrontCamera
 {
     if (picker != nil) {
-        return NUMBOOL(picker.useFrontCamera);
+        __block BOOL front;
+        TiThreadPerformOnMainThread(^{
+            front = picker.useFrontCamera;
+        }, YES);
+        return NUMBOOL(front);
     } else {
         return NUMBOOL(false);
     }
