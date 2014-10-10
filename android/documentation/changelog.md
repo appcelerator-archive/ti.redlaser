@@ -1,5 +1,7 @@
 # Change Log
 <pre>
+v1.1.2  Updated Example
+
 v1.1.1  Updated Example [MOD-1650]
     
 v1.1.0  Updated RedLaser SDK to 3.2.0 [MOD-1621]

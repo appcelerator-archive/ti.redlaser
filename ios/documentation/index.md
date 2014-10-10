@@ -158,7 +158,7 @@ Compare this to the STATUS\_XXX constants.
 
 __Type__: Integer
 
-#### isTorchAvailable
+#### isFlashAvailable
 
 Only works after the scanner was started. Call _startScanning()_ first. __Read only.__
 
