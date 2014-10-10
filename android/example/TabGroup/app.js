@@ -69,6 +69,8 @@ function isIOSWithWarning(){
     return IOS;
 }
 
+var isAssociated=false;
+
 function logBarcodeResult(barcode) {
     var locationString, barcodeInfo;
     
@@ -90,10 +92,12 @@ function logBarcodeResult(barcode) {
 
     Ti.API.info('Equals itself: ' + barcode.equals(barcode));
     
-    if (barcode.associatedBarcode) {
+    if (barcode.associatedBarcode && !isAssociated) {
+        isAssociated=true;
         Ti.API.info('Associated barcode info:');
         logBarcodeResult(barcode.associatedBarcode);
     } else {
+        isAssociated=false;
         Ti.API.info('No associated barcode.');
     }   
 }

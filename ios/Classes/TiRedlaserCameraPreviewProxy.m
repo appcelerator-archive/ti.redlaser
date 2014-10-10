@@ -6,6 +6,7 @@
 
 #import "TiRedlaserCameraPreviewProxy.h"
 #import "TiLayoutQueue.h"
+#import "TiUtils.h"
 
 @implementation TiRedlaserCameraPreviewProxy
 
@@ -42,7 +43,9 @@
             [self rememberProxy:overlay];
             
             // If not YES, the top of the subView will be +20
-            overlayViewController.wantsFullScreenLayout = YES;
+            if (![TiUtils isIOS7OrGreater]) {
+                overlayViewController.wantsFullScreenLayout = YES;
+            }
             [TiUtils setView:overlayViewController.view positionRect:[self.view bounds]];
             [TiUtils setView:overlay.view positionRect:[self.view bounds]];
             

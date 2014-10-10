@@ -33,7 +33,6 @@
 @property (nonatomic, assign) NSNumber* scanUPCE;
 @property (nonatomic, assign) NSNumber* scanEAN8;
 @property (nonatomic, assign) NSNumber* scanEAN13;
-@property (nonatomic, assign) NSNumber* scanSTICKY;
 @property (nonatomic, assign) NSNumber* scanQRCODE;
 @property (nonatomic, assign) NSNumber* scanCODE128;
 @property (nonatomic, assign) NSNumber* scanCODE39;
@@ -42,6 +41,10 @@
 @property (nonatomic, assign) NSNumber* scanEAN5;
 @property (nonatomic, assign) NSNumber* scanEAN2;
 @property (nonatomic, assign) NSNumber* scanCODABAR;
+@property (nonatomic, assign) NSNumber* scanPDF417;
+@property (nonatomic, assign) NSNumber* scanGS1DATABAR;
+@property (nonatomic, assign) NSNumber* scanGS1DATABAREXPANDED;
+@property (nonatomic, assign) NSNumber* scanCODE93;
 @property (nonatomic, assign) NSDictionary *activeRegion;
 @property (nonatomic, assign) NSNumber *orientation;
 @property (nonatomic, assign) NSNumber* torchState;

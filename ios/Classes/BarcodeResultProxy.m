@@ -57,9 +57,6 @@
         case kBarcodeTypeEAN8:
             return @"EAN8";
             break;
-        case kBarcodeTypeSTICKY:
-            return @"STIKCY";
-            break;
         case kBarcodeTypeQRCODE:
             return @"QRCODE";
             break;
@@ -83,6 +80,18 @@
             break;
         case kBarcodeTypeCodabar:
             return @"Codabar";
+            break;
+        case kBarcodeTypePDF417:
+            return @"PDF417";
+            break;
+        case kBarcodeTypeGS1Databar:
+            return @"GS1Databar";
+            break;
+        case kBarcodeTypeGS1DatabarExpanded:
+            return @"GS1DatabarExpanded";
+            break;
+        case kBarcodeTypeCODE93:
+            return @"CODE93";
             break;
         default:
             return @"unknown";

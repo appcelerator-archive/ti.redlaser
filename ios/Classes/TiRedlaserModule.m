@@ -16,7 +16,6 @@
 MAKE_SYSTEM_PROP(BARCODE_TYPE_EAN13,kBarcodeTypeEAN13);
 MAKE_SYSTEM_PROP(BARCODE_TYPE_UPCE,kBarcodeTypeUPCE);
 MAKE_SYSTEM_PROP(BARCODE_TYPE_EAN8,kBarcodeTypeEAN8);
-MAKE_SYSTEM_PROP(BARCODE_TYPE_STICKY,kBarcodeTypeSTICKY);
 MAKE_SYSTEM_PROP(BARCODE_TYPE_QRCODE,kBarcodeTypeQRCODE);
 MAKE_SYSTEM_PROP(BARCODE_TYPE_CODE128,kBarcodeTypeCODE128);
 MAKE_SYSTEM_PROP(BARCODE_TYPE_CODE39,kBarcodeTypeCODE39);
@@ -25,6 +24,10 @@ MAKE_SYSTEM_PROP(BARCODE_TYPE_ITF,kBarcodeTypeITF);
 MAKE_SYSTEM_PROP(BARCODE_TYPE_EAN5,kBarcodeTypeEAN5);
 MAKE_SYSTEM_PROP(BARCODE_TYPE_EAN2,kBarcodeTypeEAN2);
 MAKE_SYSTEM_PROP(BARCODE_TYPE_CODABAR,kBarcodeTypeCodabar);
+MAKE_SYSTEM_PROP(BARCODE_TYPE_PDF417,kBarcodeTypePDF417);
+MAKE_SYSTEM_PROP(BARCODE_TYPE_GS1DATABAR,kBarcodeTypeGS1Databar);
+MAKE_SYSTEM_PROP(BARCODE_TYPE_GS1DATABAR_EXPANDED,kBarcodeTypeGS1DatabarExpanded);
+MAKE_SYSTEM_PROP(BARCODE_TYPE_CODE93,kBarcodeTypeCODE93);
 
 MAKE_SYSTEM_PROP(STATUS_EVAL_MODE_READY,RLState_EvalModeReady);
 MAKE_SYSTEM_PROP(STATUS_LICENSED_MODE_READY,RLState_LicensedModeReady);
@@ -279,7 +282,7 @@ MAKE_SYSTEM_PROP(STATUS_SCAN_LIMIT_REACHED,RLState_ScanLimitReached);
 -(NSNumber*)isFlashAvailable
 {
     if (picker != nil) {
-        return NUMBOOL([picker hasFlash]);
+        return NUMBOOL([picker hasTorch]);
     } else {
         return NUMBOOL(NO);
         NSLog(@"[WARN] Received call to isFlashAvailable while scanner is not active.");
@@ -289,7 +292,7 @@ MAKE_SYSTEM_PROP(STATUS_SCAN_LIMIT_REACHED,RLState_ScanLimitReached);
 -(void)turnFlash:(id)value
 {
     if (picker != nil) {
-        [picker turnFlash:[TiUtils boolValue:value]];
+        [picker turnTorch:[TiUtils boolValue:value]];
     } else {
         NSLog(@"[WARN] Received call to turnFlash while scanner is not active.");
     }
@@ -351,25 +354,6 @@ MAKE_SYSTEM_PROP(STATUS_SCAN_LIMIT_REACHED,RLState_ScanLimitReached);
 {
     if (picker != nil) {
         return NUMBOOL(picker.scanEAN13);
-    } else {
-        NSLog(@"[WARN] Scanner is not active!");
-        return NUMBOOL(NO);
-    }
-}
-
--(void)setScanSTICKY:(id)value
-{
-    if (picker != nil) {
-        picker.scanSTICKY = [TiUtils boolValue:value];
-    } else {
-        NSLog(@"[WARN] Scanner is not active!");
-    }
-}
-
--(NSNumber*)scanSTICKY
-{
-    if (picker != nil) {
-        return NUMBOOL(picker.scanSTICKY);
     } else {
         NSLog(@"[WARN] Scanner is not active!");
         return NUMBOOL(NO);
@@ -512,17 +496,92 @@ MAKE_SYSTEM_PROP(STATUS_SCAN_LIMIT_REACHED,RLState_ScanLimitReached);
 -(void)setScanCODABAR:(id)value
 {
     if (picker != nil) {
-        picker.scanEAN8 = [TiUtils boolValue:value];
+        picker.scanCODABAR = [TiUtils boolValue:value];
     } else {
         NSLog(@"[WARN] Scanner is not active!");
     }
-    picker.scanCODABAR = [TiUtils boolValue:value];
 }
 
 -(NSNumber*)scanCODABAR
 {
     if (picker != nil) {
         return NUMBOOL(picker.scanCODABAR);
+    } else {
+        NSLog(@"[WARN] Scanner is not active!");
+        return NUMBOOL(NO);
+    }
+}
+
+-(void)setScanPDF417:(id)value
+{
+    if (picker != nil) {
+        picker.scanPDF417 = [TiUtils boolValue:value];
+    } else {
+        NSLog(@"[WARN] Scanner is not active!");
+    }
+}
+
+-(NSNumber*)scanPDF417
+{
+    if (picker != nil) {
+        return NUMBOOL(picker.scanPDF417);
+    } else {
+        NSLog(@"[WARN] Scanner is not active!");
+        return NUMBOOL(NO);
+    }
+}
+
+-(void)setScanGS1DATABAR:(id)value
+{
+    if (picker != nil) {
+        picker.scanGS1DATABAR = [TiUtils boolValue:value];
+    } else {
+        NSLog(@"[WARN] Scanner is not active!");
+    }
+}
+
+-(NSNumber*)scanGS1DATABAR
+{
+    if (picker != nil) {
+        return NUMBOOL(picker.scanGS1DATABAR);
+    } else {
+        NSLog(@"[WARN] Scanner is not active!");
+        return NUMBOOL(NO);
+    }
+}
+
+-(void)setScanGS1DATABAREXPANDED:(id)value
+{
+    if (picker != nil) {
+        picker.scanGS1DATABAREXPANDED = [TiUtils boolValue:value];
+    } else {
+        NSLog(@"[WARN] Scanner is not active!");
+    }
+}
+
+-(NSNumber*)scanGS1DATABAREXPANDED
+{
+    if (picker != nil) {
+        return NUMBOOL(picker.scanGS1DATABAREXPANDED);
+    } else {
+        NSLog(@"[WARN] Scanner is not active!");
+        return NUMBOOL(NO);
+    }
+}
+
+-(void)setScanCODE93:(id)value
+{
+    if (picker != nil) {
+        picker.scanCODE93 = [TiUtils boolValue:value];
+    } else {
+        NSLog(@"[WARN] Scanner is not active!");
+    }
+}
+
+-(NSNumber*)scanCODE93
+{
+    if (picker != nil) {
+        return NUMBOOL(picker.scanCODE93);
     } else {
         NSLog(@"[WARN] Scanner is not active!");
         return NUMBOOL(NO);
@@ -611,14 +670,20 @@ MAKE_SYSTEM_PROP(STATUS_SCAN_LIMIT_REACHED,RLState_ScanLimitReached);
 -(void)setUseFrontCamera:(id)value
 {
     if (picker != nil) {
-        picker.useFrontCamera = [TiUtils boolValue:value];
+        TiThreadPerformOnMainThread(^{
+            picker.useFrontCamera = [TiUtils boolValue:value];
+        }, YES);
     }
 }
 
 -(NSNumber*)useFrontCamera
 {
     if (picker != nil) {
-        return NUMBOOL(picker.useFrontCamera);
+        __block BOOL front;
+        TiThreadPerformOnMainThread(^{
+            front = picker.useFrontCamera;
+        }, YES);
+        return NUMBOOL(front);
     } else {
         return NUMBOOL(false);
     }

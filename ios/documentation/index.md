@@ -23,7 +23,7 @@ is nothing wrong with the file or its placement.
 
 ## Dependencies
 
-This module requires Release 2.1.3 or newer of the Titanium SDK.
+This module requires Release 3.2.3.GA or newer of the Titanium SDK.
 
 This module does not include support for the ARMv6 architecture on iOS.
 Refer to the Titanium Mobile 2.1.3.RC Release Notes
@@ -166,7 +166,7 @@ __Type__: Boolean
 
 #### torchState
 
-Can be used to turn flash on/off. See also _turnFlash()_. Only works after the scanner was started. Call _startScanning()_ first.
+Can be used to turn flash on/off. See also _turnTorch()_. Only works after the scanner was started. Call _startScanning()_ first.
 
 __Type__: Boolean
 
@@ -227,7 +227,7 @@ __Type__: Boolean
 #### scanCode93
 
 Turns detection of this type of barcode on/off. By default, detection
-of every supported barcode type is on. __Android only.__
+of every supported barcode type is on.
 
 __Type__: Boolean
 
@@ -269,14 +269,14 @@ __Type__: Boolean
 #### scanGS1Databar
 
 Turns detection of this type of barcode on/off. By default, detection
-of every supported barcode type is on. __Android only.__
+of every supported barcode type is on.
 
 __Type__: Boolean
 
 #### scanGS1DatabarExpanded
 
 Turns detection of this type of barcode on/off. By default, detection
-of every supported barcode type is on. __Android only.__
+of every supported barcode type is on.
 
 __Type__: Boolean
 
@@ -290,7 +290,7 @@ __Type__: Boolean
 #### scanPDF417
 
 Turns detection of this type of barcode on/off. By default, detection
-of every supported barcode type is on. __Android only.__
+of every supported barcode type is on.
 
 __Type__: Boolean
 
@@ -305,13 +305,6 @@ __Type__: Boolean
 
 Turns detection of this type of barcode on/off. By default, detection
 of every supported barcode type is on. __Android only.__
-
-__Type__: Boolean
-
-#### scanSticky
-
-Turns detection of this type of barcode on/off. By default, detection
-of every supported barcode type is on. __iOS only.__
 
 __Type__: Boolean
 
@@ -385,7 +378,7 @@ __Return type__: void
 
 __Return type__: Array of _BarcodeResult_ objects. __iOS only.__
 
-#### turnFlash(boolean)
+#### turnTorch(boolean)
 
 Turns the flash on/off. See also _torchState_.
 
@@ -473,7 +466,6 @@ The following constants represent barcode types:
 * BARCODE\_TYPE\_PDF417
 * BARCODE\_TYPE\_QRCODE
 * BARCODE\_TYPE\_RSS14
-* BARCODE\_TYPE\_STICKY
 * BARCODE\_TYPE\_UPCE
 
 The following constants represent the status of the RedLaser SDK:
