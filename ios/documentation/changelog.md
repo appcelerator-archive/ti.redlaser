@@ -1,5 +1,7 @@
 # Change Log
 <pre>
+v1.3.0  [TIMOB-18092] Updated to build for 64bit
+
 v1.2.0  Updated RedLaser iOS SDK to 3.5.2
         (iOS) Added support for CODE93, PDF417 and GS1 Databar barcodes
         (iOS) Fixed bug where setting Codebar flag also changed EAN8 flag
