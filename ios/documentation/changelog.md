@@ -1,5 +1,7 @@
 # Change Log
 <pre>
+v1.3.1  [TIMOB-18092] Fixed linker error when building with TiSDK 3.5.0+
+
 v1.3.0  [TIMOB-18092] Updated to build for 64bit
 
 v1.2.0  Updated RedLaser iOS SDK to 3.5.2

@@ -27,7 +27,6 @@
 		24DE9E1111C5FE74003F90F6 /* TiRedlaserModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* TiRedlaserModuleAssets.h */; };
 		24DE9E1211C5FE74003F90F6 /* TiRedlaserModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* TiRedlaserModuleAssets.m */; };
 		747FD7F519D1D56F003C512A /* libRedLaserSDK_arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 747FD7F419D1D56F003C512A /* libRedLaserSDK_arm64.a */; };
-		8F534CD316420747001D00EB /* libRedLaserSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F534CD116420747001D00EB /* libRedLaserSDK.a */; };
 		8F534CD416420748001D00EB /* RedLaserSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F534CD216420747001D00EB /* RedLaserSDK.h */; };
 		8F534CDB1642C0AA001D00EB /* BarcodeResultProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F534CD91642C0AA001D00EB /* BarcodeResultProxy.h */; };
 		8F534CDC1642C0AA001D00EB /* BarcodeResultProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F534CDA1642C0AA001D00EB /* BarcodeResultProxy.m */; };
@@ -57,7 +56,6 @@
 		24DE9E0F11C5FE74003F90F6 /* TiRedlaserModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiRedlaserModuleAssets.h; path = Classes/TiRedlaserModuleAssets.h; sourceTree = "<group>"; };
 		24DE9E1011C5FE74003F90F6 /* TiRedlaserModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiRedlaserModuleAssets.m; path = Classes/TiRedlaserModuleAssets.m; sourceTree = "<group>"; };
 		747FD7F419D1D56F003C512A /* libRedLaserSDK_arm64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libRedLaserSDK_arm64.a; sourceTree = "<group>"; };
-		8F534CD116420747001D00EB /* libRedLaserSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libRedLaserSDK.a; sourceTree = "<group>"; };
 		8F534CD216420747001D00EB /* RedLaserSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedLaserSDK.h; sourceTree = "<group>"; };
 		8F534CD91642C0AA001D00EB /* BarcodeResultProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarcodeResultProxy.h; path = Classes/BarcodeResultProxy.h; sourceTree = "<group>"; };
 		8F534CDA1642C0AA001D00EB /* BarcodeResultProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarcodeResultProxy.m; path = Classes/BarcodeResultProxy.m; sourceTree = "<group>"; };
@@ -79,7 +77,6 @@
 				8F534CDE1642FEB8001D00EB /* UIKit.framework in Frameworks */,
 				747FD7F519D1D56F003C512A /* libRedLaserSDK_arm64.a in Frameworks */,
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
-				8F534CD316420747001D00EB /* libRedLaserSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,7 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				747FD7F419D1D56F003C512A /* libRedLaserSDK_arm64.a */,
-				8F534CD116420747001D00EB /* libRedLaserSDK.a */,
 				8F534CD216420747001D00EB /* RedLaserSDK.h */,
 			);
 			path = RedLaserLib;
